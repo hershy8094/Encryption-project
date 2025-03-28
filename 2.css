@@ -1,0 +1,71 @@
+
+*{
+  box-sizing: border-box;
+}
+body{
+  margin: 0;
+  padding: auto;
+  font-family: 'roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  color: royalblue;
+  align-items: center;
+  background-color: rgb(51, 245, 235); 
+}
+main{
+  margin: 10% auto;
+  height: 80%;
+  width: 80%;
+  text-align: center;
+  align-items: center;
+  padding: 2em;
+  background-color: rgb(247, 108, 155);
+  border-radius: 1em ;
+  box-shadow: 0 0 5em  rgb(56, 33, 110);
+}
+input{
+  width: 65%;
+  height: 2em;
+  border-radius: 4px;
+  border:1px solid rgb(82, 51, 196) ;
+  background-color: rgb(51, 245, 235); 
+
+  padding: 0.5em;
+  margin: 0.5em auto;
+}
+#submitEncrypted,#submitText{
+  width: 45%;
+  height: 1.5em;
+  border-radius: 0.5em;
+  border: none;
+  padding: 0;
+  margin: 0.5em auto;
+}
+#submitEncrypted:hover,#submitText:hover{
+  background-color: rgb(118, 243, 237); 
+  cursor: pointer;
+}
+textarea{
+  width: 65%;
+  height: 5em;
+  border-radius: 4px;
+  border: none;
+  background-color: rgb(51, 239, 245); 
+  padding: 0.5em;
+  margin: 0.5em auto;
+}
+textarea:focus{
+  outline: none;
+  border: 2px solid rgb(82, 51, 196);
+}
+fieldset{
+  border: 1px double rgb(82, 51, 196);
+  border-radius: 4px;
+  text-align: left;
+  margin: 0 auto;
+  padding: 3px 8px;
+  width: 70%;
+}

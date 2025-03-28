@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+  <title>Encryption project</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="2.css">
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+</head>
+<body>
+  <main>
+  <h1>
+    Hello, World!
+  </h1>
+  <h2>
+    Enter your encryption key
+  </h2>
+  <input type="text" id="key" maxlength="1">
+  <h3>
+    Enter text to encrypt
+  </h3>
+  <textarea type="text" id="textInput" ></textarea>
+  <input type="submit" id="submitText" value="submit" onclick="encryptMessage()">
+  <fieldset><legend>
+    encrypted result
+  </legend>
+  <p id="results" ></p>
+  </fieldset>
+  
+  <h3>
+    Enter text to decrypt
+  </h3>
+  <textarea type="text" id="encryptedInput" ></textarea>
+  <input type="submit" id="submitEncrypted" value="submit" onclick="decryptMessage()">
+  <fieldset><legend>
+    decrypted result
+  </legend>
+  <p id="decryptedResults" ></p>
+  </fieldset>
+  <script src="version2.js"></script>
+</main>
+</body>
+</html>
