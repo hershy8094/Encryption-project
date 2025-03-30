@@ -69,3 +69,14 @@ fieldset{
   padding: 3px 8px;
   width: 70%;
 }
+#key {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 60%;
+  padding: 2px;
+  min-height: 6em; /* Ensures a minimum height */
+  max-height: none; /* Removes any height restriction */
+  word-wrap: break-word; /* Breaks long words */
+  overflow-wrap: break-word; /* Ensures compatibility */
+  white-space: normal; /* Allows text wrapping */
+  overflow: visible; /* Ensures no clipping of content */
+}

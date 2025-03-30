@@ -16,33 +16,42 @@ function getChar(num){
 let inputNumberValues 
 let finalNumArr 
 let encryptionArrStep1 
+
 function prepareInput (rawTextInput){
   inputNumberValues = []
   for (let i=0; i<rawTextInput.length; i++){
     inputNumberValues.push(getNumValue(rawTextInput[i]))
   } return inputNumberValues
 }
+function mapToRange(num) {
+  // Ensure the result is always positive
+  return ((num % 92) + 92) % 92;
+}
 //processing encryption
 function encryptMessage (){
 const key = document.getElementById("key")
 const keyCharValue = key.value
 const keyNumValue = getNumValue(keyCharValue)
- const input = document.getElementById('textInput')
+const input = document.getElementById('textInput')
 const result = document.getElementById("results")
 const updates = input.value
 //checking if the input is empty
-if (keyCharValue.length === 0){
-    result.innerHTML = "Please enter an encrypyion key."
+if (keyCharValue.length < 93){
+    result.innerHTML = "Please enter a valid encrypyion key."
 }else if(updates.length === 0){
   result.innerHTML = "Please enter text to encrypt."
 }else if(keyCharValue.length > 0 && updates.length > 0){
     console.log(keyCharValue)
 //encryption step 1
-encryptionArrStep1 = prepareInput(updates)
+encryptionArrStep1 = prepareInput(updates).concat(keyNumValue)
 .map((num) => { let result = num + keyNumValue;
-if (result > 92){result -= 93}
-  return result
+  return mapToRange(result)
 })
+//encryption step 2
+encryptMessageStep2 = encryptionArrStep1.map((num) => {
+ 
+}
+)
 finalNumArr = encryptionArrStep1
 const resultCharArr = finalNumArr.map((num) => {return getChar(num)})
 result.innerHTML = resultCharArr.join("")}
@@ -58,8 +67,7 @@ const updates = input.value
 //reversion of encryption step 1
 decryptionArrStep1 = prepareInput(updates).map((num) => {
   let result = num - keyNumValue ;
-  if (result < 0){result += 93}
-  return result
+  return mapToRange(result)
  })
  finalNumArr = decryptionArrStep1
  const resultCharArr = finalNumArr.map((num) => {return getChar(num)})
