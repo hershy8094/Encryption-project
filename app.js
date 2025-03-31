@@ -1,78 +1,104 @@
+// establish global variables on page launch
+  const textInput = document.getElementById('textInput')
+  const encryptedInput = document.getElementById('encryptedInput')
+  const encryptedResults = document.getElementById("encryptedResults")
+  const decryptedResults = document.getElementById("decryptedResults")
+
 //turn individual characters into a numeric value
-const charSet = "0123456789 AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz,;:\"'.\\/?~!@#$%^&*()_+-=<>{}[]|"
+const charSet = "0123456789 AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz,;:\"'.\\/?~`!@#$%^&*()_+-=<>{}[]|"
 const charSetArr = charSet.split('');
-//confirm(charSetArr.length)
-const charSetValues = charSetArr.map((char, index) => {return index})
+const charSetValues = charSetArr.map((char, index) => { return index })
 //getting the numeric value of a character
-function getNumValue(char){
+function getNumValue(char) {
   let numValue = charSetArr.indexOf(char)
   return numValue
 }
 //reverting number values to characters
-function getChar(num){
+function getChar(num) {
   let char = charSetArr[num]
   return char
 }
 //getting the input text ready to encrypt
-
-let encryptionArrStep1 
-
-function prepareInput (rawTextInput){
+function turnInputStringToNumArr(rawTextInput, resultField) {
+  if (rawTextInput.length === 0) {
+    resultField.innerHTML = "Please enter text to encrypt."
+  } else {
   let inputNumberValues = []
-  for (let i=0; i<rawTextInput.length; i++){
+  for (let i = 0; i < rawTextInput.length; i++) {
     inputNumberValues.push(getNumValue(rawTextInput[i]))
-  } return inputNumberValues
+  } //console.log(inputNumberValues)
+  return inputNumberValues}
 }
 function mapToRange(num) {
   // Ensure the result is always positive
-  return ((num % (charSetArr.length)) + (charSetArr.length)) % (charSetArr.length);
+  reducedNum = ((num % (charSetArr.length)) + (charSetArr.length)) % (charSetArr.length);
+  return reducedNum;
 }
 //processing encryption
-function encryptMessage (){
-const key = document.getElementById("key")
-const keyCharValue = key.value
-const keyNumValue = prepareInput(keyCharValue)
-const input = document.getElementById('textInput')
-const result = document.getElementById("results")
-const updates = input.value
-//checking if the input is empty
-if (keyCharValue.length < 9){
-    result.innerHTML = "Please enter a valid encrypyion key."
-}else if(updates.length === 0){
-  result.innerHTML = "Please enter text to encrypt."
-}else {
-    console.log(keyCharValue, keyNumValue)
-  const encryptionArrStep0 = prepareInput(updates)
-//encryption step 1
-encryptionArrStep1 = encryptionArrStep0.map((num) => { let result = num + keyNumValue;
-  return mapToRange(result)
-})
-//encryption step 2
-let encryptionArrStep2 = encryptionArrStep1.map((num) => {
- 
-}
-) 
-let finalNumArr = encryptionArrStep1
-const resultCharArr = finalNumArr.map((num) => {return getChar(num)})
-result.innerHTML = resultCharArr.join("")}
+function encryptMessage() {
+  const keyNumValue = findKey(encryptedResults);
+  const encryptionArrStartingPoint = turnInputStringToNumArr((textInput.value), encryptedResults);
+  //if (!encryptionArrStartingPoint) return; // Exit if input is invalid
+  // Encryption step 1
+  const encryptionArrStep1 = encryptionArrStartingPoint.map((num) => {
+    let result = num + keyNumValue[3];
+    return mapToRange(result);
+  });
+
+  const resultCharArr = encryptionArrStep1.map((num) => getChar(num));
+  console.log(encryptionArrStep1)
+  encryptedResults.innerHTML = resultCharArr.join("");
 }
 //processing decrption
-function decryptMessage (){
-    const key = document.getElementById("key")
-    const keyCharValue = key.value
-    const keyNumValue = getNumValue(keyCharValue)
-const input = document.getElementById('encryptedInput')
-const result = document.getElementById("decryptedResults")
-const updates = input.value
-//reversion of encryption step 1
-let decryptionArrStep1 = prepareInput(updates).map((num) => {
-  let result = num - keyNumValue ;
-  return mapToRange(result)
- })
- finalNumArr = decryptionArrStep1
- const resultCharArr = finalNumArr.map((num) => {return getChar(num)})
- //checking if the input is empty
- if (updates.length === 0){
-   result.innerHTML = "Please enter text to decrypt."
- }else{result.innerHTML = resultCharArr.join("")}
-} 
+function decryptMessage() {
+  const keyNumValue = findKey(decryptedResults);
+  const input = encryptedInput.value;
+
+  if (!input) {
+    decryptedResults.innerHTML = "Please enter text to decrypt.";
+    return;
+  }
+
+  const decryptionArrStartingPoint = turnInputStringToNumArr(input, decryptedResults);
+
+  // Reversion of encryption step 1
+  const decryptionArrStep1 = decryptionArrStartingPoint.map((num) => {
+    let result = num - keyNumValue[3]; // Use the same key index as in encryption
+    return mapToRange(result);
+  });
+
+  // Convert numbers back to characters
+  const resultCharArr = decryptionArrStep1.map((num) => getChar(num));
+  decryptedResults.innerHTML = resultCharArr.join(""); // Display the decrypted result
+}
+//button to create a random key
+function createKey() {
+  let randomKey = []
+  for (let i = 0; i < 9; i++) {
+    randomKey.push(Math.floor(Math.random() * charSetArr.length))
+  }
+  console.log(randomKey)
+  const keyString = randomKey.map((num) => getChar(num)).join("")
+  document.getElementById("key").innerHTML = keyString
+}
+function findKey(result) {
+  const keyCharValue = document.getElementById("key").value
+  if (keyCharValue.length < 9) {
+    result.innerHTML = "Please enter a valid encrypyion key."
+  } else {
+    const keyNumValue = turnInputStringToNumArr(keyCharValue)
+    //console.log(keyNumValue)
+    return keyNumValue
+  }
+}
+//button to clear the results
+function clearResults() {
+  const result = document.getElementById("results")
+  result.innerHTML = ""
+}
+//button to copy the results to the clipboard 
+function copyResults() {
+  const result = document.getElementById("results")
+  navigator.clipboard.writeText(result.innerHTML)
+  alert("Results copied to clipboard")
+}
