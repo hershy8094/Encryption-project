@@ -9,36 +9,36 @@
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
 </head>
 <body>
+  <header>
+    <h1>Hello, World!</h1>
+  </header>
   <main>
-  <h1>
-    Hello, World!
-  </h1>
-  <h2>
-    Enter your encryption key
-  </h2>
-  <textarea id="key" maxlength="9" placeholder="Enter key" ></textarea>
-  <h3>
-    Enter text to encrypt
-  </h3>
-  <textarea type="text" id="textInput" ></textarea>
-  <input type="submit" id="submitText" value="submit" onclick="encryptMessage()">
-  <fieldset><legend>
-    encrypted result
-  </legend>
-  <p id="results" ></p>
-  </fieldset>
-  
-  <h3>
-    Enter text to decrypt
-  </h3>
-  <textarea type="text" id="encryptedInput" ></textarea>
-  <input type="submit" id="submitEncrypted" value="submit" onclick="decryptMessage()">
-  <fieldset><legend>
-    decrypted result
-  </legend>
-  <p id="decryptedResults" ></p>
-  </fieldset>
+    <section>
+      <h2>Enter your encryption key</h2>
+      <textarea id="key" maxlength="9" placeholder="Enter key"></textarea>
+      <button id="createKey" onclick="createKey()">creeate random key</button>
+    </section>
+    
+    <section>
+      <h3>Enter text to encrypt</h3>
+      <textarea type="text" id="textInput"></textarea>
+      <input type="submit" id="submitText" value="submit" onclick="encryptMessage()">
+      <fieldset>
+        <legend>encrypted result</legend>
+        <p id="results"></p>
+      </fieldset>
+    </section>
+    
+    <section>
+      <h3>Enter text to decrypt</h3>
+      <textarea type="text" id="encryptedInput"></textarea>
+      <input type="submit" id="submitEncrypted" value="submit" onclick="decryptMessage()">
+      <fieldset>
+        <legend>decrypted result</legend>
+        <p id="decryptedResults"></p>
+      </fieldset>
+    </section>
+  </main>
   <script src="app.js"></script>
-</main>
 </body>
 </html>

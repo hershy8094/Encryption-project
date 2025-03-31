@@ -1,6 +1,7 @@
 //turn individual characters into a numeric value
 const charSet = "0123456789 AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz,;:\"'.\\/?~!@#$%^&*()_+-=<>{}[]|"
-const charSetArr = charSet.split('')
+const charSetArr = charSet.split('');
+//confirm(charSetArr.length)
 const charSetValues = charSetArr.map((char, index) => {return index})
 //getting the numeric value of a character
 function getNumValue(char){
@@ -13,19 +14,18 @@ function getChar(num){
   return char
 }
 //getting the input text ready to encrypt
-let inputNumberValues 
-let finalNumArr 
+
 let encryptionArrStep1 
 
 function prepareInput (rawTextInput){
-  inputNumberValues = []
+  let inputNumberValues = []
   for (let i=0; i<rawTextInput.length; i++){
     inputNumberValues.push(getNumValue(rawTextInput[i]))
   } return inputNumberValues
 }
 function mapToRange(num) {
   // Ensure the result is always positive
-  return ((num % 92) + 92) % 92;
+  return ((num % (charSetArr.length)) + (charSetArr.length)) % (charSetArr.length);
 }
 //processing encryption
 function encryptMessage (){
@@ -48,11 +48,11 @@ encryptionArrStep1 = encryptionArrStep0.map((num) => { let result = num + keyNum
   return mapToRange(result)
 })
 //encryption step 2
-encryptionArrStep2 = encryptionArrStep1.map((num) => {
+let encryptionArrStep2 = encryptionArrStep1.map((num) => {
  
 }
-)
-finalNumArr = encryptionArrStep1
+) 
+let finalNumArr = encryptionArrStep1
 const resultCharArr = finalNumArr.map((num) => {return getChar(num)})
 result.innerHTML = resultCharArr.join("")}
 }
@@ -65,7 +65,7 @@ const input = document.getElementById('encryptedInput')
 const result = document.getElementById("decryptedResults")
 const updates = input.value
 //reversion of encryption step 1
-decryptionArrStep1 = prepareInput(updates).map((num) => {
+let decryptionArrStep1 = prepareInput(updates).map((num) => {
   let result = num - keyNumValue ;
   return mapToRange(result)
  })
