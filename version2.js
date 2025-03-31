@@ -42,9 +42,9 @@ if (keyCharValue.length < 9){
   result.innerHTML = "Please enter text to encrypt."
 }else {
     console.log(keyCharValue, keyNumValue)
+  const encryptionArrStep0 = prepareInput(updates)
 //encryption step 1
-encryptionArrStep1 = prepareInput(updates)
-.map((num) => { let result = num + keyNumValue;
+encryptionArrStep1 = encryptionArrStep0.map((num) => { let result = num + keyNumValue;
   return mapToRange(result)
 })
 //encryption step 2
