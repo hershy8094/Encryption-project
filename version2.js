@@ -1,5 +1,5 @@
 //turn individual characters into a numeric value
-const charSet = `0123456789 AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz,;:"'./?~!@#$%^&*()_+-=<>{}[]|`
+const charSet = "0123456789 AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz,;:\"'.\\/?~!@#$%^&*()_+-=<>{}[]|"
 const charSetArr = charSet.split('')
 const charSetValues = charSetArr.map((char, index) => {return index})
 //getting the numeric value of a character
@@ -31,31 +31,31 @@ function mapToRange(num) {
 function encryptMessage (){
 const key = document.getElementById("key")
 const keyCharValue = key.value
-const keyNumValue = getNumValue(keyCharValue)
+const keyNumValue = prepareInput(keyCharValue)
 const input = document.getElementById('textInput')
 const result = document.getElementById("results")
 const updates = input.value
 //checking if the input is empty
-if (keyCharValue.length < 93){
+if (keyCharValue.length < 9){
     result.innerHTML = "Please enter a valid encrypyion key."
 }else if(updates.length === 0){
   result.innerHTML = "Please enter text to encrypt."
-}else if(keyCharValue.length > 0 && updates.length > 0){
-    console.log(keyCharValue)
+}else {
+    console.log(keyCharValue, keyNumValue)
 //encryption step 1
-encryptionArrStep1 = prepareInput(updates).concat(keyNumValue)
+encryptionArrStep1 = prepareInput(updates)
 .map((num) => { let result = num + keyNumValue;
   return mapToRange(result)
 })
 //encryption step 2
-encryptMessageStep2 = encryptionArrStep1.map((num) => {
+encryptionArrStep2 = encryptionArrStep1.map((num) => {
  
 }
 )
 finalNumArr = encryptionArrStep1
 const resultCharArr = finalNumArr.map((num) => {return getChar(num)})
 result.innerHTML = resultCharArr.join("")}
-} 
+}
 //processing decrption
 function decryptMessage (){
     const key = document.getElementById("key")
