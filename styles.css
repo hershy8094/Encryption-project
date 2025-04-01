@@ -11,7 +11,7 @@ body{
   justify-content: center;
   height: 100%;
   width: 100%;
-  color: royalblue;
+  color: rgb(178, 10, 194);
   align-items: center;
   background-color: rgb(51, 245, 235); 
 }
@@ -22,7 +22,7 @@ main{
   text-align: center;
   align-items: center;
   padding: 2em;
-  background-color: rgb(247, 108, 155);
+  background-color: rgb(247, 126, 182);
   border-radius: 1em ;
   box-shadow: 0 0 5em  rgb(56, 33, 110);
 }
@@ -59,7 +59,7 @@ textarea{
 }
 textarea:focus{
   outline: none;
-  border: 2px solid rgb(82, 51, 196);
+  border: 1px solid rgb(82, 51, 196);
 }
 fieldset{
   border: 1px double rgb(82, 51, 196);
@@ -74,9 +74,15 @@ fieldset{
   font-size: 60%;
   padding: 2px;
   min-height: 6em; /* Ensures a minimum height */
-  max-height: none; /* Removes any height restriction */
-  word-wrap: break-word; /* Breaks long words */
-  overflow-wrap: break-word; /* Ensures compatibility */
-  white-space: normal; /* Allows text wrapping */
-  overflow: visible; /* Ensures no clipping of content */
+  
+}
+#key:focus {
+  outline: none;
+  border: 1px solid rgb(82, 51, 196);
+}
+#encryptedResults, #decryptedResults{
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 60%;
+  padding: 2px;
+  min-height: 6em; /* Ensures a minimum height */
 }

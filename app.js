@@ -40,8 +40,8 @@ function encryptMessage() {
   const encryptionArrStartingPoint = turnInputStringToNumArr((textInput.value), encryptedResults);
   //if (!encryptionArrStartingPoint) return; // Exit if input is invalid
   // Encryption step 1
-  const encryptionArrStep1 = encryptionArrStartingPoint.map((num) => {
-    let result = num + keyNumValue[3];
+  const encryptionArrStep1 = encryptionArrStartingPoint.map((num, index) => {
+  let result = num + ((keyNumValue[0] + 3) * (index + 2) * (index + 3));
     return mapToRange(result);
   });
 
@@ -62,8 +62,8 @@ function decryptMessage() {
   const decryptionArrStartingPoint = turnInputStringToNumArr(input, decryptedResults);
 
   // Reversion of encryption step 1
-  const decryptionArrStep1 = decryptionArrStartingPoint.map((num) => {
-    let result = num - keyNumValue[3]; // Use the same key index as in encryption
+  const decryptionArrStep1 = decryptionArrStartingPoint.map((num, index) => {
+    let result = num - ((keyNumValue[0] + 3) * (index + 2) * (index + 3));
     return mapToRange(result);
   });
 
