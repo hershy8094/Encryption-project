@@ -3,9 +3,9 @@
   const encryptedInput = document.getElementById('encryptedInput')
   const encryptedResults = document.getElementById("encryptedResults")
   const decryptedResults = document.getElementById("decryptedResults")
-
+  const key = document.getElementById("key")
 //turn individual characters into a numeric value
-const charSet = "0123456789 AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz,;:\"'.\\/?~`!@#$%^&*()_+-=<>{}[]|"
+const charSet = "0123456789 AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz\n,;:\"'.\\/?~`!@#$%^&*()_+-=<>{}[]|"
 const charSetArr = charSet.split('');
 const charSetValues = charSetArr.map((char, index) => { return index })
 //getting the numeric value of a character
@@ -38,38 +38,38 @@ function mapToRange(num) {
 function encryptMessage() {
   const keyNumValue = findKey(encryptedResults);
   const encryptionArrStartingPoint = turnInputStringToNumArr((textInput.value), encryptedResults);
-  //if (!encryptionArrStartingPoint) return; // Exit if input is invalid
   // Encryption step 1
   const encryptionArrStep1 = encryptionArrStartingPoint.map((num, index) => {
-  let result = num + ((keyNumValue[0] + 3) * (index + 2) * (index + 3));
+  let result = num + ((keyNumValue[0] + 3) * (index + 8));
     return mapToRange(result);
   });
-
-  const resultCharArr = encryptionArrStep1.map((num) => getChar(num));
-  console.log(encryptionArrStep1)
-  encryptedResults.innerHTML = resultCharArr.join("");
+  //encryption step 2
+  encryptionArrStep1.unshift(keyNumValue[1])
+  const encryptionArrStep2 = encryptionArrStep1.map((num, index, array) => {
+    let result = num + ((keyNumValue[1] + 1) * (array[index - 1] + 1));
+    return mapToRange(result);
+  });
+  encryptionArrStep2.shift()
+  // Convert numbers back to characters
+  const resultCharArr = encryptionArrStep2.map((num) => getChar(num));
+  console.log(encryptionArrStep1, encryptionArrStep2)
+  const resultString = resultCharArr.join("");
+  encryptedResults.textContent = resultString;
 }
 //processing decrption
 function decryptMessage() {
   const keyNumValue = findKey(decryptedResults);
-  const input = encryptedInput.value;
-
-  if (!input) {
-    decryptedResults.innerHTML = "Please enter text to decrypt.";
-    return;
-  }
-
-  const decryptionArrStartingPoint = turnInputStringToNumArr(input, decryptedResults);
+  const decryptionArrStartingPoint = turnInputStringToNumArr((encryptedInput.value), decryptedResults);
 
   // Reversion of encryption step 1
   const decryptionArrStep1 = decryptionArrStartingPoint.map((num, index) => {
-    let result = num - ((keyNumValue[0] + 3) * (index + 2) * (index + 3));
+    let result = num - ((keyNumValue[0] + 3) * (index + 8));
     return mapToRange(result);
   });
 
   // Convert numbers back to characters
   const resultCharArr = decryptionArrStep1.map((num) => getChar(num));
-  decryptedResults.innerHTML = resultCharArr.join(""); // Display the decrypted result
+  decryptedResults.textContent = resultCharArr.join("");
 }
 //button to create a random key
 function createKey() {
@@ -79,10 +79,10 @@ function createKey() {
   }
   console.log(randomKey)
   const keyString = randomKey.map((num) => getChar(num)).join("")
-  document.getElementById("key").innerHTML = keyString
+  key.value = keyString
 }
 function findKey(result) {
-  const keyCharValue = document.getElementById("key").value
+  const keyCharValue = key.value
   if (keyCharValue.length < 9) {
     result.innerHTML = "Please enter a valid encrypyion key."
   } else {
