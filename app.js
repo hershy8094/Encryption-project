@@ -44,25 +44,26 @@ function encryptMessage() {
     return mapToRange(result);
   });
   //encryption step 2
-  encryptionArrStep1.unshift(keyNumValue[1])
-  const encryptionArrStep2 = encryptionArrStep1.map((num, index, array) => {
+  const encryptionArrStep2 = encryptionArrStep1.unshift(keyNumValue[1]).map((num, index, array) => {
     let result = num + ((keyNumValue[1] + 1) * (array[index - 1] + 1));
     return mapToRange(result);
-  });
-  encryptionArrStep2.shift()
+  }).shift();
   // Convert numbers back to characters
-  const resultCharArr = encryptionArrStep2.map((num) => getChar(num));
   console.log(encryptionArrStep1, encryptionArrStep2)
-  const resultString = resultCharArr.join("");
+  const resultString = encryptionArrStep2.map((num) => getChar(num)).join("");
   encryptedResults.textContent = resultString;
 }
 //processing decrption
 function decryptMessage() {
   const keyNumValue = findKey(decryptedResults);
   const decryptionArrStartingPoint = turnInputStringToNumArr((encryptedInput.value), decryptedResults);
-
+  //reversion of encryption step 2
+  const decryptionArrStep2 = decryptionArrStartingPoint.unshift(keyNumValue[1]).map((num, index, array) => {
+    let result = num - ((keyNumValue[1] + 1) * (array[index - 1] + 1));
+    return mapToRange(result);
+  }).shift();
   // Reversion of encryption step 1
-  const decryptionArrStep1 = decryptionArrStartingPoint.map((num, index) => {
+  const decryptionArrStep1 = decryptionArrStep2.map((num, index) => {
     let result = num - ((keyNumValue[0] + 3) * (index + 8));
     return mapToRange(result);
   });
