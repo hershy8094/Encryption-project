@@ -3,7 +3,7 @@
 }
 body{
   margin: 0;
-  padding: auto;
+  padding: 0;
   font-family: 'roboto', sans-serif;
   display: flex;
   flex-direction: column;
