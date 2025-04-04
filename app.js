@@ -52,7 +52,6 @@ function encryptMessage() {
       const ind = index + 1;
       const randomFactor = Math.floor((Math.sin(key + ind) * 10000) % 10); // Deterministic random value
       let result = num + ((key ** 4) * (ind ** 4)) + randomFactor;
-      console.log("Step 1: " + result)
       return mapToRange(result);
     });
     //encryption step 2
@@ -66,7 +65,7 @@ function encryptMessage() {
     const encryptionArrStep3 = encryptionArrStep2.map((num, index, arr) => {
       const ind = index + 1;
       const key = keyNumValue[k+2] + 1;
-      let result = num;
+      let result = num ;
       return mapToRange(result);
     });
     //encryption step 4
@@ -114,35 +113,88 @@ function encryptMessage() {
 //processing decrption
 function decryptMessage() {
   const keyNumValue = findKey(decryptedResults);
-  const decryptionArrStartingPoint = turnInputStringToNumArr((encryptedInput.value), decryptedResults);
+  const decryptionArrStartingPoint = turnInputStringToNumArr(encryptedInput.value, decryptedResults);
   if (decryptionArrStartingPoint.length === 0 || keyNumValue === null) {
     return;
   }
-  // Reversion of encryption step 3
-  const decryptionArrStep3 = [keyNumValue[1], ...decryptionArrStartingPoint].map((num, index, array) => {
-    let result = num - ((keyNumValue[1] + 1) * (array[index - 1] + 1));
-    return mapToRange(result);
-  }).slice(1);
-  //reversion of encryption step 2
-  const decryptionArrStep2 = decryptionArrStartingPoint.map((num, index) => {
-    const ind = index + 3;
-    const key = keyNumValue[1] + 3;
-    let result = (num ^ (key * ind)) / (key + ind); // XOR operation
-    return mapToRange(result);
-  });
 
-  // Reversion of encryption step 1
-  const decryptionArrStep1 = decryptionArrStartingPoint.map((num, index) => {
-    const ind = index + 2;
-    const key = keyNumValue[0] + 2;
-    const randomFactor = Math.floor((Math.sin(key + ind) * 10000) % 10); // Same deterministic random value
-    let result = num - ((key ** 3) * (ind ** 3)) - randomFactor;
-    return mapToRange(result);
-  });
-  console.log( decryptionArrStep1)
+  let currentDecryptionArr = decryptionArrStartingPoint;
+
+  // Decryption steps (reverse the encryption steps)
+  for (let i = 11; i >= 0; i--) { // Reverse loop to undo encryption steps
+    const k = i * 8;
+
+    // Decryption step 8
+    const decryptionArrStep8 = currentDecryptionArr.map((num, index) => {
+      const ind = index + 1;
+      const key = keyNumValue[k + 7] + 1;
+      let result = num; // Reverse the transformation from encryption step 8
+      return mapToRange(result);
+    });
+
+    // Decryption step 7
+    const decryptionArrStep7 = decryptionArrStep8.map((num, index) => {
+      const ind = index + 1;
+      const key = keyNumValue[k + 6] + 1;
+      let result = num; // Reverse the transformation from encryption step 7
+      return mapToRange(result);
+    });
+
+    // Decryption step 6
+    const decryptionArrStep6 = decryptionArrStep7.map((num, index) => {
+      const ind = index + 1;
+      const key = keyNumValue[k + 5] + 1;
+      let result = num; // Reverse the transformation from encryption step 6
+      return mapToRange(result);
+    });
+
+    // Decryption step 5
+    const decryptionArrStep5 = decryptionArrStep6.map((num, index) => {
+      const ind = index + 1;
+      const key = keyNumValue[k + 4] + 1;
+      let result = num; // Reverse the transformation from encryption step 5
+      return mapToRange(result);
+    });
+
+    // Decryption step 4
+    const decryptionArrStep4 = decryptionArrStep5.map((num, index) => {
+      const ind = index + 1;
+      const key = keyNumValue[k + 3] + 1;
+      let result = num; // Reverse the transformation from encryption step 4
+      return mapToRange(result);
+    });
+
+    // Decryption step 3
+    const decryptionArrStep3 = decryptionArrStep4.map((num, index) => {
+      const ind = index + 1;
+      const key = keyNumValue[k + 2] + 1;
+      let result = num; // Reverse the transformation from encryption step 3
+      return mapToRange(result);
+    });
+
+    // Decryption step 2
+    const decryptionArrStep2 = decryptionArrStep3.map((num, index) => {
+      const ind = index + 1;
+      const key = keyNumValue[k + 1] + 1;
+      let result = num; // Reverse the transformation from encryption step 2
+      return mapToRange(result);
+    });
+
+    // Decryption step 1
+    const decryptionArrStep1 = decryptionArrStep2.map((num, index) => {
+      const ind = index + 1;
+      const key = keyNumValue[k] + 1;
+      const randomFactor = Math.floor((Math.sin(key + ind) * 10000) % 10); // Same deterministic random value
+      let result = num - ((key ** 4) * (ind ** 4)) - randomFactor; // Reverse the transformation from encryption step 1
+      return mapToRange(result);
+    });
+
+    currentDecryptionArr = decryptionArrStep1; // Update the current decryption array
+  }
+
   // Convert numbers back to characters
-  const resultString = decryptionArrStep1.map((num) => getChar(num)).join("");
-  decryptedResults.textContent = resultString; 
+  const resultString = currentDecryptionArr.map((num) => getChar(num)).join("");
+  decryptedResults.textContent = resultString;
 }
 //button to create a random key
 function createKey() {
