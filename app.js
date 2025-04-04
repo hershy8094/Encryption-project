@@ -1,9 +1,9 @@
 // establish global variables on page launch
-  const textInput = document.getElementById('textInput')
-  const encryptedInput = document.getElementById('encryptedInput')
-  const encryptedResults = document.getElementById("encryptedResults")
-  const decryptedResults = document.getElementById("decryptedResults")
-  const key = document.getElementById("key")
+const textInput = document.getElementById('textInput')
+const encryptedInput = document.getElementById('encryptedInput')
+const encryptedResults = document.getElementById("encryptedResults")
+const decryptedResults = document.getElementById("decryptedResults")
+const key = document.getElementById("key")
 //turn individual characters into a numeric value
 const charSet = "0123456789 AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz\n,;:\"'.\\/?~`!@#$%^&*()_+-=<>{}[]|";
 const charSetArr = charSet.split('');
@@ -24,11 +24,12 @@ function turnInputStringToNumArr(rawTextInput, resultField) {
     resultField.innerHTML = "Please enter text to encrypt."
     return [];
   } else {
-  let inputNumberValues = []
-  for (let i = 0; i < rawTextInput.length; i++) {
-    inputNumberValues.push(getNumValue(rawTextInput[i]))
-  } //console.log(inputNumberValues)
-  return inputNumberValues}
+    let inputNumberValues = []
+    for (let i = 0; i < rawTextInput.length; i++) {
+      inputNumberValues.push(getNumValue(rawTextInput[i]))
+    } //console.log(inputNumberValues)
+    return inputNumberValues
+  }
 }
 function mapToRange(num) {
   // Ensure the result is always positive
@@ -44,7 +45,7 @@ function encryptMessage() {
   }
   let currentEncryptionArr = encryptionArrStartingPoint;
   // Encryption steps
-  for(let i=0; i < 12; i++){
+  for (let i = 0; i < 12; i++) {
     const k = i * 8;
     // Encryption step 1
     const encryptionArrStep1 = currentEncryptionArr.map((num, index) => {
@@ -55,60 +56,60 @@ function encryptMessage() {
       return mapToRange(result);
     });
     //encryption step 2
-      const encryptionArrStep2 = encryptionArrStep1.map((num, index, arr) => {
+    const encryptionArrStep2 = encryptionArrStep1.map((num, index, arr) => {
       const ind = index + 1
-      const key = keyNumValue[k+1] + 1
+      const key = keyNumValue[k + 1] + 1
       let result = num
       return mapToRange(result);
     });
     //encryption step 3
     const encryptionArrStep3 = encryptionArrStep2.map((num, index, arr) => {
       const ind = index + 1;
-      const key = keyNumValue[k+2] + 1;
-      let result = num ;
+      const key = keyNumValue[k + 2] + 1;
+      let result = num;
       return mapToRange(result);
     });
     //encryption step 4
     const encryptionArrStep4 = encryptionArrStep3.map((num, index, arr) => {
       const ind = index + 1;
-      const key = keyNumValue[k+3] + 1;
+      const key = keyNumValue[k + 3] + 1;
       let result = num;
       return mapToRange(result);
     });
     //encryption step 5
     const encryptionArrStep5 = encryptionArrStep4.map((num, index, arr) => {
       const ind = index + 1;
-      const key = keyNumValue[k+4] + 1;
+      const key = keyNumValue[k + 4] + 1;
       let result = num;
       return mapToRange(result);
     });
     //encryption step 6
     const encryptionArrStep6 = encryptionArrStep5.map((num, index, arr) => {
       const ind = index + 1;
-      const key = keyNumValue[k+5] + 1;
+      const key = keyNumValue[k + 5] + 1;
       let result = num;
       return mapToRange(result);
     });
     //encryption step 7
-    const encryptionArrStep7 = encryptionArrStep6.map((num, index,arr) => {
+    const encryptionArrStep7 = encryptionArrStep6.map((num, index, arr) => {
       const ind = index + 1;
-      const key = keyNumValue[k+6] + 1;
+      const key = keyNumValue[k + 6] + 1;
       let result = num;
       return mapToRange(result);
     });
     //encryption step 8
     const encryptionArrStep8 = encryptionArrStep7.map((num, index, arr) => {
       const ind = index + 1;
-      const key = keyNumValue[k+7] + 1;
+      const key = keyNumValue[k + 7] + 1;
       let result = num;
       return mapToRange(result);
     });
     currentEncryptionArr = encryptionArrStep8;
   }
   // Convert numbers back to characters
- 
+
   const resultString = currentEncryptionArr.map((num) => getChar(num)).join("");
-  encryptedResults.textContent = resultString; 
+  encryptedResults.textContent = resultString;
 }
 //processing decrption
 function decryptMessage() {
@@ -211,7 +212,7 @@ function findKey(result) {
     result.innerHTML = "Please enter a valid encryption key.";
     return null;
   } else {
-    const keyNumValue = turnInputStringToNumArr(keyCharValue, result); 
+    const keyNumValue = turnInputStringToNumArr(keyCharValue, result);
     return keyNumValue;
   }
 }
