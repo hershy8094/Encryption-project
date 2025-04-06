@@ -7,7 +7,6 @@ const key = document.getElementById("key")
 //turn individual characters into a numeric value
 const charSet = "0123456789 AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz\n,;:\"'.\\/?~`!@#$%^&*()_+-=<>{}[]|";
 const charSetArr = charSet.split('');
-const charSetValues = charSetArr.map((char, index) => { return index })
 //getting the numeric value of a character
 function getNumValue(char) {
   let numValue = charSetArr.indexOf(char)
@@ -118,9 +117,7 @@ function decryptMessage() {
   if (decryptionArrStartingPoint.length === 0 || keyNumValue === null) {
     return;
   }
-
   let currentDecryptionArr = decryptionArrStartingPoint;
-
   // Decryption steps (reverse the encryption steps)
   for (let i = 11; i >= 0; i--) { // Reverse loop to undo encryption steps
     const k = i * 8;
