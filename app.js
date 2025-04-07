@@ -55,12 +55,16 @@ function encryptMessage() {
       return mapToRange(result);
     });
     //encryption step 2
-    const encryptionArrStep2 = encryptionArrStep1.map((num, index, arr) => {
-      const ind = index + 1
-      const key = keyNumValue[k + 1] + 1
-      let result = num
-      return mapToRange(result);
-    });
+    const encryptionArrStep2 = []
+    const key = keyNumValue[k + 1] + 1
+    let previousValue = key;
+    for (let index = 0; index < currentEncryptionArr.length; index++) {
+      const num = encryptionArrStep1[index]
+      let result = num + previousValue
+      const mappedResult = mapToRange(result)
+      encryptionArrStep2.push(mappedResult)
+      previousValue = result
+    }
     //encryption step 3
     const encryptionArrStep3 = encryptionArrStep2.map((num, index, arr) => {
       const ind = index + 1;
@@ -171,12 +175,15 @@ function decryptMessage() {
     });
 
     // Decryption step 2
-    const decryptionArrStep2 = decryptionArrStep3.map((num, index) => {
-      const ind = index + 1;
-      const key = keyNumValue[k + 1] + 1;
-      let result = num; // Reverse the transformation from encryption step 2
-      return mapToRange(result);
-    });
+    const decryptionArrStep2 = [];
+    const key = keyNumValue[k + 1] + 1;
+    let previousValue = key;
+    for (let index = 0; index < decryptionArrStep3.length; index++) {
+      const num = decryptionArrStep3[index];
+      const result = mapToRange(num - previousValue); // Reverse the addition
+      decryptionArrStep2.push(result);
+      previousValue = mapToRange(previousValue + result); // Update previousValue to match encryption logic
+    }
 
     // Decryption step 1
     const decryptionArrStep1 = decryptionArrStep2.map((num, index) => {
