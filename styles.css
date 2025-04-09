@@ -61,8 +61,6 @@ p {
   font-size: 1.1rem;
   margin-bottom: 1.5rem;
   color: #555555;
-  pointer-events: none; /* Prevent interaction */
-  user-select: none; /* Prevent text selection */
 }
 
 input, textarea {
@@ -137,8 +135,6 @@ legend {
   border-radius: 12px;
   white-space: pre-wrap;
   min-height: 80px;
-  pointer-events: none; /* Prevent interaction */
-  user-select: text; /* Allow text selection */
 }
 
 
