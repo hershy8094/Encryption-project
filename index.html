@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
 <head>
-  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
   <title>Encryption Project</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="styles.css">
@@ -16,8 +16,8 @@
     <section>
       <h2>Enter your encryption key</h2>
       <textarea id="key" maxlength="96" placeholder="Enter key"></textarea>
-      <button id="createKey" onclick="createKey()">Create Random Key</button>
-      <button id="copyKey" onclick="copyKey()">Copy Key</button>
+      <button id="createKey" onclick="createKey()" aria-label="Create a random encryption key">Create Random Key</button>
+      <button id="copyKey" onclick="copyKey()" aria-label="Copy the encryption key">Copy Key</button>
     </section>
     
     <div id="toggleContainer">
@@ -33,10 +33,11 @@
         <legend>Encrypted Result</legend>
         <p id="encryptedResults"></p>
         <button id="copyEncryptedResults" onclick="copyResults('encryptedResults')">Copy Encrypted Results</button>
+        <button id="downloadEncryptedResults" onclick="downloadResults('encryptedResults')">Download Encrypted Results</button>
       </fieldset>
     </section>
 
-    <section id="decryptionSection" style="display: none;">
+    <section id="decryptionSection" class="hidden">
       <h3>Enter text to decrypt</h3>
       <textarea id="encryptedInput" placeholder="Enter text to decrypt"></textarea>
       <input type="submit" id="submitEncrypted" value="Submit" onclick="decryptMessage()">
@@ -44,9 +45,15 @@
         <legend>Decrypted Result</legend>
         <p id="decryptedResults"></p>
         <button id="copyDecryptedResults" onclick="copyResults('decryptedResults')">Copy Decrypted Results</button>
+        <button id="downloadDecryptedResults" onclick="downloadResults('decryptedResults')">Download Decrypted Results</button>
       </fieldset>
     </section>
+
+    <button onclick="showHelp()">Help</button>
+    <div id="helpModal" class="hidden">
+      <p id="helpText">Enter text and a key to encrypt or decrypt your message.</p>
+    </div>
   </main>
-  <script src="app.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>

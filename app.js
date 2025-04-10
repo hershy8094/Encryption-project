@@ -137,6 +137,15 @@ function copyResults(resultId) {
     .catch(() => alert('Failed to copy results.'));
 }
 
+function downloadResults(resultId) {
+  const result = document.getElementById(resultId).textContent;
+  const blob = new Blob([result], { type: 'text/plain' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = `${resultId}.txt`;
+  link.click();
+}
+
 function toggleSection(section) {
   const encryptionSection = document.getElementById('encryptionSection');
   const decryptionSection = document.getElementById('decryptionSection');
@@ -178,3 +187,9 @@ document.addEventListener('DOMContentLoaded', () => {
   decryptionSection.style.display = 'none';
   toggleSection('encryption');
 });
+
+function showHelp() {
+  const helpModal = document.getElementById('helpModal');
+  helpModal.classList.remove('hidden');
+  helpModal.style.display = 'block'; // Ensure it's visible
+}
