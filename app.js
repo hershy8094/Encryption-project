@@ -231,3 +231,22 @@ function copyResults() {
   navigator.clipboard.writeText(result.innerHTML)
   alert("Results copied to clipboard")
 }
+
+function toggleSection(section) {
+  const encryptionSection = document.getElementById('encryptionSection');
+  const decryptionSection = document.getElementById('decryptionSection');
+  const showEncryption = document.getElementById('showEncryption');
+  const showDecryption = document.getElementById('showDecryption');
+
+  if (section === 'encryption') {
+    encryptionSection.style.display = 'block';
+    decryptionSection.style.display = 'none';
+    showEncryption.classList.add('active');
+    showDecryption.classList.remove('active');
+  } else if (section === 'decryption') {
+    encryptionSection.style.display = 'none';
+    decryptionSection.style.display = 'block';
+    showEncryption.classList.remove('active');
+    showDecryption.classList.add('active');
+  }
+}

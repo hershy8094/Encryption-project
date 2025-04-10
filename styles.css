@@ -86,13 +86,13 @@ textarea {
   resize: vertical;
 }
 
-button {
+#createKey {
   width: 100%;
   max-width: 300px;
   padding: 1rem;
   margin: 1rem 0;
   border: none;
-  border-radius: 12px;
+  border-radius: 20px;
   font-size: 1.2rem;
   font-weight: 600;
   color: #ffffff;
@@ -101,13 +101,13 @@ button {
   transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
 }
 
-button:hover {
+#createKey:hover {
   background: linear-gradient(135deg, #ff9a9e, #fad0c4);
   transform: translateY(-3px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-button:active {
+#createKey:active {
   transform: translateY(0);
   box-shadow: none;
 }
@@ -126,6 +126,7 @@ legend {
   font-weight: bold;
   margin-left: 0.5rem;
   color: #ff6f61;
+  padding: 0 0.5rem;
 }
 
 #encryptedResults, #decryptedResults {
@@ -137,6 +138,34 @@ legend {
   min-height: 80px;
 }
 
+#toggleContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  background-color: #f7f7f7;
+  border: 2px solid #ff6f61;
+  border-radius: 50px; /* Make the container fully rounded */
+  overflow: hidden; /* Ensure buttons fit neatly inside */
+  width: fit-content;
+}
+
+#toggleContainer button {
+  flex: 1;
+  margin: 0;
+  padding: 0.5rem 1.5rem;
+  border: none;
+  color: #ff6f61;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#toggleContainer button.active {
+  background-color: #ff6f61; /* Highlight active button */
+  color: #ffffff; /* White text for active button */
+  border-radius: 50px; /* Make the active button fully rounded */
+}
 
 footer {
   margin-top: 2.5rem;

@@ -19,7 +19,12 @@
       <button id="createKey" onclick="createKey()">creeate random key</button>
     </section>
     
-    <section>
+    <div id="toggleContainer">
+      <button id="showEncryption" onclick="toggleSection('encryption')">Encryption</button>
+      <button id="showDecryption" onclick="toggleSection('decryption')">Decryption</button>
+    </div>
+
+    <section id="encryptionSection">
       <h3>Enter text to encrypt</h3>
       <textarea type="text" id="textInput"></textarea>
       <input type="submit" id="submitText" value="submit" onclick="encryptMessage()">
@@ -28,8 +33,8 @@
         <p id="encryptedResults"></p>
       </fieldset>
     </section>
-    
-    <section>
+
+    <section id="decryptionSection" style="display: none;">
       <h3>Enter text to decrypt</h3>
       <textarea type="text" id="encryptedInput"></textarea>
       <input type="submit" id="submitEncrypted" value="submit" onclick="decryptMessage()">
