@@ -3,7 +3,7 @@
 <html>
 <head>
   <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
-  <title>Encryption project</title>
+  <title>Encryption Project</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="styles.css">
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
@@ -16,31 +16,34 @@
     <section>
       <h2>Enter your encryption key</h2>
       <textarea id="key" maxlength="96" placeholder="Enter key"></textarea>
-      <button id="createKey" onclick="createKey()">creeate random key</button>
+      <button id="createKey" onclick="createKey()">Create Random Key</button>
+      <button id="copyKey" onclick="copyKey()">Copy Key</button>
     </section>
     
     <div id="toggleContainer">
-      <button id="showEncryption" onclick="toggleSection('encryption')">Encryption</button>
+      <button id="showEncryption" class="active" onclick="toggleSection('encryption')">Encryption</button>
       <button id="showDecryption" onclick="toggleSection('decryption')">Decryption</button>
     </div>
 
     <section id="encryptionSection">
       <h3>Enter text to encrypt</h3>
-      <textarea type="text" id="textInput"></textarea>
-      <input type="submit" id="submitText" value="submit" onclick="encryptMessage()">
+      <textarea id="textInput" placeholder="Enter text to encrypt"></textarea>
+      <input type="submit" id="submitText" value="Submit" onclick="encryptMessage()">
       <fieldset>
-        <legend>encrypted result</legend>
+        <legend>Encrypted Result</legend>
         <p id="encryptedResults"></p>
+        <button id="copyEncryptedResults" onclick="copyResults('encryptedResults')">Copy Encrypted Results</button>
       </fieldset>
     </section>
 
     <section id="decryptionSection" style="display: none;">
       <h3>Enter text to decrypt</h3>
-      <textarea type="text" id="encryptedInput"></textarea>
-      <input type="submit" id="submitEncrypted" value="submit" onclick="decryptMessage()">
+      <textarea id="encryptedInput" placeholder="Enter text to decrypt"></textarea>
+      <input type="submit" id="submitEncrypted" value="Submit" onclick="decryptMessage()">
       <fieldset>
-        <legend>decrypted result</legend>
+        <legend>Decrypted Result</legend>
         <p id="decryptedResults"></p>
+        <button id="copyDecryptedResults" onclick="copyResults('decryptedResults')">Copy Decrypted Results</button>
       </fieldset>
     </section>
   </main>
