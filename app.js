@@ -191,5 +191,11 @@ document.addEventListener('DOMContentLoaded', () => {
 function showHelp() {
   const helpModal = document.getElementById('helpModal');
   helpModal.classList.remove('hidden');
-  helpModal.style.display = 'block'; // Ensure it's visible
+  helpModal.style.display = 'block';
+}
+
+function closeHelp() {
+  const helpModal = document.getElementById('helpModal');
+  helpModal.classList.add('hidden');
+  helpModal.style.display = 'none';
 }

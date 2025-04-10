@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="styles.css">
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
   <header>
@@ -14,10 +15,18 @@
   </header>
   <main>
     <section>
-      <h2>Enter your encryption key</h2>
-      <textarea id="key" maxlength="96" placeholder="Enter key"></textarea>
-      <button id="createKey" onclick="createKey()" aria-label="Create a random encryption key">Create Random Key</button>
-      <button id="copyKey" onclick="copyKey()" aria-label="Copy the encryption key">Copy Key</button>
+      <div class="input-container">
+        <textarea id="key" maxlength="96" placeholder=" "></textarea>
+        <label for="key">Enter key</label>
+      </div>
+      <div class="button-group">
+        <button id="createKey" onclick="createKey()" aria-label="Create a random encryption key">
+          <i class="fas fa-key"></i>
+        </button>
+        <button id="copyKey" onclick="copyKey()" aria-label="Copy the encryption key">
+          <i class="fas fa-copy"></i>
+        </button>
+      </div>
     </section>
     
     <div id="toggleContainer">
@@ -26,32 +35,72 @@
     </div>
 
     <section id="encryptionSection">
-      <h3>Enter text to encrypt</h3>
-      <textarea id="textInput" placeholder="Enter text to encrypt"></textarea>
+      <div class="input-container">
+        <textarea id="textInput" placeholder=" "></textarea>
+        <label for="textInput">Enter text to encrypt</label>
+      </div>
       <input type="submit" id="submitText" value="Submit" onclick="encryptMessage()">
       <fieldset>
         <legend>Encrypted Result</legend>
         <p id="encryptedResults"></p>
-        <button id="copyEncryptedResults" onclick="copyResults('encryptedResults')">Copy Encrypted Results</button>
-        <button id="downloadEncryptedResults" onclick="downloadResults('encryptedResults')">Download Encrypted Results</button>
+        <div class="button-group">
+          <button type="button" id="copyEncryptedResults" onclick="copyResults('encryptedResults')" aria-label="Copy Encrypted Results">
+            <i class="fas fa-copy"></i>
+          </button>
+          <button type="button" id="downloadEncryptedResults" onclick="downloadResults('encryptedResults')" aria-label="Download Encrypted Results">
+            <i class="fas fa-download"></i>
+          </button>
+        </div>
       </fieldset>
     </section>
 
     <section id="decryptionSection" class="hidden">
-      <h3>Enter text to decrypt</h3>
-      <textarea id="encryptedInput" placeholder="Enter text to decrypt"></textarea>
+      <div class="input-container">
+        <textarea id="encryptedInput" placeholder=" "></textarea>
+        <label for="encryptedInput">Enter text to decrypt</label>
+      </div>
       <input type="submit" id="submitEncrypted" value="Submit" onclick="decryptMessage()">
       <fieldset>
         <legend>Decrypted Result</legend>
         <p id="decryptedResults"></p>
-        <button id="copyDecryptedResults" onclick="copyResults('decryptedResults')">Copy Decrypted Results</button>
-        <button id="downloadDecryptedResults" onclick="downloadResults('decryptedResults')">Download Decrypted Results</button>
+        <div class="button-group">
+          <button type="button" id="copyDecryptedResults" onclick="copyResults('decryptedResults')" aria-label="Copy Decrypted Results">
+            <i class="fas fa-copy"></i>
+          </button>
+          <button type="button" id="downloadDecryptedResults" onclick="downloadResults('decryptedResults')" aria-label="Download Decrypted Results">
+            <i class="fas fa-download"></i>
+          </button>
+        </div>
       </fieldset>
     </section>
 
-    <button onclick="showHelp()">Help</button>
+    <button type="button" onclick="showHelp()">Help</button>
     <div id="helpModal" class="hidden">
-      <p id="helpText">Enter text and a key to encrypt or decrypt your message.</p>
+      <div id="helpContent">
+        <h2>Help & Instructions</h2>
+        <p>
+          Welcome to the Encryption Project! This tool allows you to encrypt and decrypt text using a custom key. Follow the steps below to get started:
+        </p>
+        <h3>Encryption</h3>
+        <ol>
+          <li>Enter the text you want to encrypt in the "Enter text to encrypt" field.</li>
+          <li>Provide a custom encryption key in the "Enter key" field or generate a random key by clicking the <i class="fas fa-key"></i> button.</li>
+          <li>Click the "Submit" button to encrypt your text. The encrypted result will appear below.</li>
+          <li>You can copy the encrypted result using the <i class="fas fa-copy"></i> button or download it as a text file using the <i class="fas fa-download"></i> button.</li>
+        </ol>
+        <h3>Decryption</h3>
+        <ol>
+          <li>Enter the encrypted text in the "Enter text to decrypt" field.</li>
+          <li>Provide the same encryption key used to encrypt the text in the "Enter key" field.</li>
+          <li>Click the "Submit" button to decrypt the text. The decrypted result will appear below.</li>
+          <li>You can copy the decrypted result using the <i class="fas fa-copy"></i> button or download it as a text file using the <i class="fas fa-download"></i> button.</li>
+        </ol>
+        <h3>Key Information</h3>
+        <p>
+          The encryption key is essential for both encrypting and decrypting text. Without the correct key, the text cannot be decrypted. You can either enter your own key or generate a random one. The key must be exactly 96 characters long.
+        </p>
+        <button onclick="closeHelp()">Close</button>
+      </div>
     </div>
   </main>
     <script src="app.js"></script>
