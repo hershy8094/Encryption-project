@@ -25,7 +25,7 @@
         <button id="createKey" onclick="createKey()" aria-label="Create a random encryption key">
           <i class="fas fa-key"></i>
         </button>
-        <button id="copyKey" onclick="copyKey()" aria-label="Copy the encryption key">
+        <button id="copyKey" onclick="copyResults('key')" aria-label="Copy the encryption key">
           <i class="fas fa-copy"></i>
         </button>
       </div>
@@ -77,35 +77,36 @@
     </section>
 
     <button type="button" onclick="showHelp()">Help</button>
-    <div id="helpModal" class="hidden">
-      <div id="helpContent">
-        <button id="closeHelpButton" onclick="closeHelp()" aria-label="Close Help">&times;</button>
-        <h2>Help & Instructions</h2>
-        <p>
-          Welcome to the Encryption Project! This tool allows you to encrypt and decrypt text using a custom key. Follow the steps below to get started:
-        </p>
-        <h3>Encryption</h3>
-        <ol>
-          <li>Enter the text you want to encrypt in the "Enter text to encrypt" field.</li>
-          <li>Provide a custom encryption key in the "Enter key" field or generate a random key by clicking the <i class="fas fa-key"></i> button.</li>
-          <li>Click the "Submit" button to encrypt your text. The encrypted result will appear below.</li>
-          <li>You can copy the encrypted result using the <i class="fas fa-copy"></i> button or download it as a text file using the <i class="fas fa-download"></i> button.</li>
-        </ol>
-        <h3>Decryption</h3>
-        <ol>
-          <li>Enter the encrypted text in the "Enter text to decrypt" field.</li>
-          <li>Provide the same encryption key used to encrypt the text in the "Enter key" field.</li>
-          <li>Click the "Submit" button to decrypt the text. The decrypted result will appear below.</li>
-          <li>You can copy the decrypted result using the <i class="fas fa-copy"></i> button or download it as a text file using the <i class="fas fa-download"></i> button.</li>
-        </ol>
-        <h3>Key Information</h3>
-        <p>
-          The encryption key is essential for both encrypting and decrypting text. Without the correct key, the text cannot be decrypted. You can either enter your own key or generate a random one. The key must be exactly 96 characters long.
-        </p>
-        <button type="button" id="closeHelp" onclick ="closeHelp()">Close</button>
-      </div>
-    </div>
+    
   </main>
+  <div id="helpModal" class="hidden">
+    <div id="helpContent">
+      <button id="closeHelpButton" onclick="closeHelp()" aria-label="Close Help">&times;</button>
+      <h2>Help & Instructions</h2>
+      <p>
+        Welcome to the Encryption Project! This tool allows you to encrypt and decrypt text using a custom key. Follow the steps below to get started:
+      </p>
+      <h3>Encryption</h3>
+      <ol>
+        <li>Enter the text you want to encrypt in the "Enter text to encrypt" field.</li>
+        <li>Provide a custom encryption key in the "Enter key" field or generate a random key by clicking the <i class="fas fa-key"></i> button.</li>
+        <li>Click the "Submit" button to encrypt your text. The encrypted result will appear below.</li>
+        <li>You can copy the encrypted result using the <i class="fas fa-copy"></i> button or download it as a text file using the <i class="fas fa-download"></i> button.</li>
+      </ol>
+      <h3>Decryption</h3>
+      <ol>
+        <li>Enter the encrypted text in the "Enter text to decrypt" field.</li>
+        <li>Provide the same encryption key used to encrypt the text in the "Enter key" field.</li>
+        <li>Click the "Submit" button to decrypt the text. The decrypted result will appear below.</li>
+        <li>You can copy the decrypted result using the <i class="fas fa-copy"></i> button or download it as a text file using the <i class="fas fa-download"></i> button.</li>
+      </ol>
+      <h3>Key Information</h3>
+      <p>
+        The encryption key is essential for both encrypting and decrypting text. Without the correct key, the text cannot be decrypted. You can either enter your own key or generate a random one. The key must be exactly 96 characters long.
+      </p>
+      <button type="button" id="closeHelp" onclick ="closeHelp()">Close</button>
+    </div>
+  </div>
     <script src="app.js"></script>
 </body>
 </html>

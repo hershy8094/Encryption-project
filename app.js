@@ -112,30 +112,15 @@ function findKey(result) {
   }
 }
 
-function clearResults() {
-  document.getElementById("results").innerHTML = "";
-}
-
-function copyKey() {
-  if (key.value.trim() === '') {
-    showNotification('No key to copy!');
-    return;
-  }
-  navigator.clipboard.writeText(key.value)
-    .then(() => showNotification('Key copied to clipboard!'))
-    .catch(() => showNotification('Failed to copy key.'));
-}
-
 function copyResults(resultId) {
   const resultElement = document.getElementById(resultId);
-  if (resultElement.textContent.trim() === '') {
-    showNotification('No results to copy!');
+  if (resultElement.value.trim() === '') {
+    showNotification('There\'s nothing to copy!');
     return;
   }
   navigator.clipboard.writeText(resultElement.textContent)
-    .then(() => showNotification('Results copied to clipboard!'))
-    .catch(() => showNotification('Failed to copy results.'));
-}
+    .then(() => showNotification('Copied to clipboard!'))
+    .catch(() => showNotification('Failed to copy.'));}
 
 function downloadResults(resultId) {
   const resultElement = document.getElementById(resultId);
@@ -157,27 +142,19 @@ function toggleSection(section) {
   const showEncryption = document.getElementById('showEncryption');
   const showDecryption = document.getElementById('showDecryption');
 
-  encryptionSection.classList.remove('no-animation');
-  decryptionSection.classList.remove('no-animation');
 
   if (section === 'encryption') {
     decryptionSection.style.animation = 'slideOutToRight 0.3s forwards';
     encryptionSection.style.animation = 'slideInFromLeft 0.3s forwards';
     encryptionSection.style.display = 'block';
-    setTimeout(() => {
-      decryptionSection.classList.add('hidden');
-      decryptionSection.style.display = 'none';
-    }, 300);
+    decryptionSection.style.display = 'none';
     showEncryption.classList.add('active');
     showDecryption.classList.remove('active');
   } else if (section === 'decryption') {
     encryptionSection.style.animation = 'slideOutToLeft 0.3s forwards';
     decryptionSection.style.animation = 'slideInFromRight 0.3s forwards';
     decryptionSection.style.display = 'block';
-    setTimeout(() => {
-      encryptionSection.classList.add('hidden');
-      encryptionSection.style.display = 'none';
-    }, 300);
+    encryptionSection.style.display = 'none';
     showEncryption.classList.remove('active');
     showDecryption.classList.add('active');
   }
@@ -190,7 +167,6 @@ document.addEventListener('DOMContentLoaded', () => {
   decryptionSection.classList.add('no-animation');
   encryptionSection.style.display = 'block';
   decryptionSection.style.display = 'none';
-  toggleSection('encryption');
 });
 
 function showHelp() {
@@ -207,16 +183,10 @@ function closeHelp() {
 
 function showNotification(message) {
   const notificationContainer = document.getElementById('notificationContainer');
-
-  // Create a new notification element
   const notification = document.createElement('div');
   notification.className = 'notification';
   notification.textContent = message;
-
-  // Append the notification to the container
   notificationContainer.appendChild(notification);
-
-  // Remove the notification after 2 seconds
   setTimeout(() => {
     notification.remove();
   }, 2000);

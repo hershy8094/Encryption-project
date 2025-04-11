@@ -2,6 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 
 body {
@@ -100,20 +101,10 @@ body {
   }
 }
 
-
-.hidden {
-  display: none;
-  opacity: 0;
-}
-
-.no-animation {
-  animation: none !important;
-}
-
 /* General Section Styling */
 section {
   margin: 2rem 0;
-  padding: 1.5rem;
+  padding: 1rem;
   border: 2px solid #ff6f61;
   border-radius: 12px;
   background-color: #f9f9f9;
@@ -178,8 +169,9 @@ p {
 }
 
 textarea, input {
-  width: 100%;
-  padding: 1.2rem;
+  width: 96%;
+  margin: 0.5rem;
+  padding: 1rem;
   border: 1px solid #dddddd;
   border-radius: 12px;
   font-size: 1rem;
@@ -191,11 +183,6 @@ textarea:focus, input:focus {
   outline: none;
   border-color: #ff6f61;
   box-shadow: 0 0 10px rgba(255, 111, 97, 0.4);
-}
-
-textarea::placeholder, input::placeholder {
-  background-color: transparent;
-  color: transparent; /* Hide placeholder text */
 }
 
 label {
@@ -220,14 +207,14 @@ textarea:not(:placeholder-shown) + label, input:not(:placeholder-shown) + label 
 
 textarea {
   min-height: 120px;
-  resize: vertical;
+  resize: none;
 }
 
 button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin: 0;
+  margin: 0.3rem;
   padding: 0.6rem;
   min-width: 2.5rem;
   min-height: 2.5rem;
@@ -247,10 +234,6 @@ button:hover {
 
 button:active {
   transform: scale(1);
-}
-
-button i {
-  pointer-events: none; /* Prevent icon from interfering with button clicks */
 }
 
 /* Fieldset Styling */
@@ -307,13 +290,10 @@ legend {
   border-radius: 50px;
 }
 
-#helpText {
-  color: #ff6f61;
-}
-
 /* Help Modal Styling */
 #helpModal {
   position: fixed;
+  display: none;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -321,6 +301,7 @@ legend {
   border: 2px solid #ff6f61;
   border-radius: 12px;
   padding: 2rem;
+  color: #ff6f61;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
   z-index: 1000;
   width: 90%;
@@ -332,21 +313,13 @@ legend {
 
 #helpModal h2 {
   font-size: 1.8rem;
-  color: #ff6f61;
   margin-bottom: 1rem;
   text-align: center;
 }
 
 #helpModal h3 {
   font-size: 1.4rem;
-  color: #333333;
   margin-top: 1.5rem;
-}
-
-#helpModal p {
-  font-size: 1rem;
-  color: #555555;
-  margin-bottom: 1rem;
 }
 
 #helpModal ol {
@@ -381,7 +354,6 @@ legend {
   padding: 0 0.6rem;
   border: none;
   font-size: 1.8rem;
-
   color: #ff6f61;
   cursor: pointer;
   transition: color 0.3s ease;
