@@ -74,6 +74,33 @@ body {
   }
 }
 
+@keyframes fadeOut {
+  0% {
+    opacity: 0.8;
+  }
+  30% {
+    opacity: 0.95;
+  }
+  45% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0.05;
+    
+  }
+}
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%); /* Start above the window */
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0); /* Slide into view */
+    opacity: 1;
+  }
+}
+
+
 .hidden {
   display: none;
   opacity: 0;
@@ -351,6 +378,30 @@ legend {
   justify-content: center;
   gap: 0.5rem; /* Add spacing between buttons */
   margin-top: 1rem;
+}
+
+#notificationContainer {
+  position: fixed;
+  top: 2rem;
+  text-align: center;
+  z-index: 1000; 
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 90%;
+  max-width: 400px;
+  pointer-events: none; 
+}
+
+.notification {
+  background: linear-gradient(135deg, #ff6f61, #ff9a9e);
+  color: #ffffff;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  animation: slideDown 0.5s ease, fadeOut 1.5s forwards;
+  pointer-events: auto; /* Allow interaction with individual notifications */
 }
 
 @media (max-width: 768px) {

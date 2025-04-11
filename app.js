@@ -118,26 +118,31 @@ function clearResults() {
 
 function copyKey() {
   if (key.value.trim() === '') {
-    alert('No key to copy!');
+    showNotification('No key to copy!');
     return;
   }
   navigator.clipboard.writeText(key.value)
-    .then(() => alert('Key copied to clipboard!'))
-    .catch(() => alert('Failed to copy key.'));
+    .then(() => showNotification('Key copied to clipboard!'))
+    .catch(() => showNotification('Failed to copy key.'));
 }
 
 function copyResults(resultId) {
   const resultElement = document.getElementById(resultId);
   if (resultElement.textContent.trim() === '') {
-    alert('No results to copy!');
+    showNotification('No results to copy!');
     return;
   }
   navigator.clipboard.writeText(resultElement.textContent)
-    .then(() => alert('Results copied to clipboard!'))
-    .catch(() => alert('Failed to copy results.'));
+    .then(() => showNotification('Results copied to clipboard!'))
+    .catch(() => showNotification('Failed to copy results.'));
 }
 
 function downloadResults(resultId) {
+  const resultElement = document.getElementById(resultId);
+  if (resultElement.textContent.trim() === '') {
+    showNotification('No results to download!');
+    return;
+  }
   const result = document.getElementById(resultId).textContent;
   const blob = new Blob([result], { type: 'text/plain' });
   const link = document.createElement('a');
@@ -198,4 +203,21 @@ function closeHelp() {
   const helpModal = document.getElementById('helpModal');
   helpModal.classList.add('hidden');
   helpModal.style.display = 'none';
+}
+
+function showNotification(message) {
+  const notificationContainer = document.getElementById('notificationContainer');
+
+  // Create a new notification element
+  const notification = document.createElement('div');
+  notification.className = 'notification';
+  notification.textContent = message;
+
+  // Append the notification to the container
+  notificationContainer.appendChild(notification);
+
+  // Remove the notification after 2 seconds
+  setTimeout(() => {
+    notification.remove();
+  }, 2000);
 }
