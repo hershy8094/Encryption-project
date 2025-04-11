@@ -354,7 +354,7 @@ legend {
   margin-bottom: 1rem;
 }
 
-#helpModal button {
+#closeHelp {
   display: block;
   width: 5rem;
   margin: 1.5rem auto 0;
@@ -368,8 +368,27 @@ legend {
   transition: background-color 0.3s ease;
 }
 
-#helpModal button:hover {
+#closeHelp:hover {
   background-color: #ff9a9e;
+}
+
+#closeHelpButton {
+  all: unset;
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: none;
+  padding: 0 0.6rem;
+  border: none;
+  font-size: 1.8rem;
+
+  color: #ff6f61;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+#closeHelpButton:hover {
+  color: #ff9a9e;
 }
 
 /* Button Group Styling */

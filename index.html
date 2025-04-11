@@ -79,6 +79,7 @@
     <button type="button" onclick="showHelp()">Help</button>
     <div id="helpModal" class="hidden">
       <div id="helpContent">
+        <button id="closeHelpButton" onclick="closeHelp()" aria-label="Close Help">&times;</button>
         <h2>Help & Instructions</h2>
         <p>
           Welcome to the Encryption Project! This tool allows you to encrypt and decrypt text using a custom key. Follow the steps below to get started:
@@ -101,7 +102,7 @@
         <p>
           The encryption key is essential for both encrypting and decrypting text. Without the correct key, the text cannot be decrypted. You can either enter your own key or generate a random one. The key must be exactly 96 characters long.
         </p>
-        <button onclick="closeHelp()">Close</button>
+        <button type="button" id="closeHelp" onclick ="closeHelp()">Close</button>
       </div>
     </div>
   </main>
