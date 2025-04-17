@@ -101,16 +101,6 @@ color: #ff6f61;
   }
 }
 
-/* General Section Styling */
-section {
-  margin: 2rem 0;
-  padding: 1rem;
-  border: 2px solid #ff6f61;
-  border-radius: 12px;
-  background-color: #f9f9f9;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
 main {
   width: 90%;
   max-width: 800px;
@@ -126,6 +116,19 @@ main {
 main:hover {
   transform: scale(1.02);
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+section {
+  margin: 2rem 0;
+  padding: 1rem;
+  border: 2px solid #ff6f61;
+  border-radius: 12px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#decryptionSection{
+  display: none;
 }
 
 h1 {
@@ -146,11 +149,11 @@ p {
 .input-container {
   position: relative;
   margin-bottom: 1.5rem;
+  overflow: visible;
 }
 
 textarea, input {
-  width: 96%;
-  margin: 0.5rem;
+  width: 100%;
   padding: 1rem;
   border: 1px solid #dddddd;
   border-radius: 12px;

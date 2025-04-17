@@ -159,14 +159,9 @@ function toggleSection(section) {
     showDecryption.classList.add('active');
   }
 }
-document.addEventListener('DOMContentLoaded', () => {
-  const decryptionSection = document.getElementById('decryptionSection');
-  decryptionSection.style.display = 'none';
-});
 
 function showHelp() {
   const helpModal = document.getElementById('helpModal');
-  helpModal.classList.remove('hidden');
   helpModal.style.display = 'block';
 }
 
