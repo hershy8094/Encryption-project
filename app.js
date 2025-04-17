@@ -160,15 +160,6 @@ function toggleSection(section) {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  const encryptionSection = document.getElementById('encryptionSection');
-  const decryptionSection = document.getElementById('decryptionSection');
-  encryptionSection.classList.add('no-animation');
-  decryptionSection.classList.add('no-animation');
-  encryptionSection.style.display = 'block';
-  decryptionSection.style.display = 'none';
-});
-
 function showHelp() {
   const helpModal = document.getElementById('helpModal');
   helpModal.classList.remove('hidden');

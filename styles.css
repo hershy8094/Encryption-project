@@ -10,12 +10,13 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 3%;
   align-items: center;
   min-height: 100vh;
   background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb);
   background-size: 200% 200%;
   animation: gradientAnimation 8s ease infinite;
-  color: #333333;
+color: #ff6f61;
   line-height: 1.6;
 }
 
@@ -87,16 +88,16 @@ body {
   }
   100% {
     opacity: 0.05;
-    
   }
 }
+
 @keyframes slideDown {
   from {
-    transform: translateY(-100%); /* Start above the window */
+    transform: translateY(-100%);
     opacity: 0;
   }
   to {
-    transform: translateY(0); /* Slide into view */
+    transform: translateY(0);
     opacity: 1;
   }
 }
@@ -109,26 +110,12 @@ section {
   border-radius: 12px;
   background-color: #f9f9f9;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  animation-duration: 0.3s;
-  animation-fill-mode: forwards;
-}
-
-
-/* Section Headings */
-section h2 {
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
-  color: #333333;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 1px;
 }
 
 main {
   width: 90%;
   max-width: 800px;
   background-color: #ffffff;
-  color: #333333;
   border-radius: 16px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
   padding: 2.5rem;
@@ -145,22 +132,17 @@ main:hover {
 h1 {
   font-size: 2rem;
   margin-bottom: 1.5rem;
-  color: #ff6f61;
-  font-weight: 700;
-  text-transform: uppercase;
   letter-spacing: 1.5px;
 }
 
 h2, h3 {
   font-size: 1.5rem;
   margin-bottom: 1rem;
-  color: #ff6f61;
 }
 
 p {
   font-size: 1rem;
   margin-bottom: 1.5rem;
-  color: #555555;
 }
 
 .input-container {
@@ -190,7 +172,7 @@ label {
   top: 1rem;
   left: 1rem;
   font-size: 1rem;
-  color: #555555;
+color: #555555;
   pointer-events: none;
   transition: all 0.3s ease;
 }
@@ -200,7 +182,6 @@ textarea:not(:placeholder-shown) + label, input:not(:placeholder-shown) + label 
   top: -0.5rem;
   left: 1rem;
   font-size: 0.8rem;
-  color: #ff6f61;
   background-color: #f9f9f9;
   padding: 0 0.3rem;
 }
@@ -220,8 +201,9 @@ button {
   min-height: 2.5rem;
   border: none;
   border-radius: 50%;
+color: #ffffff;
   font-size: 1.2rem;
-  color: #ffffff;
+color: #ffffff;
   background: linear-gradient(135deg, #ff6f61, #ff9a9e);
   cursor: pointer;
   transition: transform 0.2s ease, background-color 0.3s ease;
@@ -248,7 +230,6 @@ fieldset {
 legend {
   font-size: 1.2rem;
   font-weight: bold;
-  color: #ff6f61;
   padding: 0 0.5rem;
 }
 
@@ -278,7 +259,6 @@ legend {
   flex: 1;
   padding: 0.6rem;
   background-color: transparent;
-  color: #ff6f61;
   font-size: 0.9rem;
   font-weight: bold;
   cursor: pointer;
@@ -301,7 +281,6 @@ legend {
   border: 2px solid #ff6f61;
   border-radius: 12px;
   padding: 2rem;
-  color: #ff6f61;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
   z-index: 1000;
   width: 90%;
@@ -333,7 +312,6 @@ legend {
   margin: 1.5rem auto 0;
   padding: 0.5rem 1rem;
   font-size: 1rem;
-  color: #ffffff;
   background-color: #ff6f61;
   border: none;
   border-radius: 100%;
@@ -354,7 +332,6 @@ legend {
   padding: 0 0.6rem;
   border: none;
   font-size: 1.8rem;
-  color: #ff6f61;
   cursor: pointer;
   transition: color 0.3s ease;
 }
@@ -367,7 +344,7 @@ legend {
 .button-group {
   display: flex;
   justify-content: center;
-  gap: 0.5rem; /* Add spacing between buttons */
+  gap: 0.5rem;
   margin-top: 1rem;
 }
 
@@ -375,24 +352,23 @@ legend {
   position: fixed;
   top: 2rem;
   text-align: center;
-  z-index: 1000; 
+  z-index: 1000;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   width: 90%;
   max-width: 400px;
-  pointer-events: none; 
+  pointer-events: none;
 }
 
 .notification {
   background: linear-gradient(135deg, #ff6f61, #ff9a9e);
-  color: #ffffff;
+color: #ffffff;
   padding: 0.8rem 1.2rem;
   border-radius: 8px;
   font-size: 1rem;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   animation: slideDown 0.5s ease, fadeOut 1.5s forwards;
-  pointer-events: auto; /* Allow interaction with individual notifications */
 }
 
 @media (max-width: 768px) {
