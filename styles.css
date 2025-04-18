@@ -297,10 +297,9 @@ legend {
 }
 
 #helpModal li {
-  margin-left: 1rem;
-  list-style: decimal;
-  margin-bottom: 0.5rem;
+  overflow: visible;
 }
+
 #closeHelp {
   display: block;
   width: 5rem;
