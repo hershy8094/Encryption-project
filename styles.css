@@ -1,6 +1,5 @@
 * {
   box-sizing: border-box;
-  margin: 0;
   overflow-x: hidden;
 }
 
@@ -297,15 +296,15 @@ legend {
   margin-top: 1.5rem;
 }
 
-#helpModal ol {
-  margin-left: 1.5rem;
-  margin-bottom: 1rem;
+#helpModal li {
+  margin-left: 1rem;
+  list-style: decimal;
+  margin-bottom: 0.5rem;
 }
-
 #closeHelp {
   display: block;
   width: 5rem;
-  margin: 1.5rem auto 0;
+  margin: 1.5rem auto 0.5rem;
   padding: 0.5rem 1rem;
   font-size: 1rem;
   background-color: #ff6f61;
@@ -315,7 +314,7 @@ legend {
   transition: background-color 0.3s ease;
 }
 
-#closeHelp:hover {
+#closeHelp:hover, #closeHelpButton:hover {
   background-color: #ff9a9e;
 }
 
@@ -332,11 +331,6 @@ legend {
   transition: color 0.3s ease;
 }
 
-#closeHelpButton:hover {
-  color: #ff9a9e;
-}
-
-/* Button Group Styling */
 .button-group {
   display: flex;
   justify-content: center;
