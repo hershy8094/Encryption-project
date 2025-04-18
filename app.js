@@ -29,6 +29,16 @@ function mapToRange(num) {
   return ((num % charSetArr.length) + charSetArr.length) % charSetArr.length;
 }
 
+function findKey(result) {
+  const keyCharValue = key.value;
+  if (keyCharValue.length < 96) {
+    result.textContent = "Please enter a valid encryption key.";
+    return null;
+  } else {
+    return turnInputStringToNumArr(keyCharValue, result);
+  }
+}
+
 function encryptMessage() {
   const keyNumValue = findKey(encryptedResults);
   const encryptionArrStartingPoint = turnInputStringToNumArr(textInput.value, encryptedResults);
@@ -100,16 +110,7 @@ function decryptMessage() {
 function createKey() {
   const randomKey = Array.from({ length: 96 }, () => Math.floor(Math.random() * charSetArr.length));
   key.textContent = randomKey.map(getChar).join("");
-}
-
-function findKey(result) {
-  const keyCharValue = key.value;
-  if (keyCharValue.length < 96) {
-    result.textContent = "Please enter a valid encryption key.";
-    return null;
-  } else {
-    return turnInputStringToNumArr(keyCharValue, result);
-  }
+  key.value = randomKey.map(getChar).join("");
 }
 
 function copyResults(resultId) {
@@ -167,7 +168,6 @@ function showHelp() {
 
 function closeHelp() {
   const helpModal = document.getElementById('helpModal');
-  helpModal.classList.add('hidden');
   helpModal.style.display = 'none';
 }
 
