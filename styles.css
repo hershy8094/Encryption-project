@@ -162,25 +162,28 @@ textarea, input {
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-textarea:focus, input:focus {
-  outline: none;
-  border-color: #ff6f61;
-  box-shadow: 0 0 10px rgba(255, 111, 97, 0.4);
-}
-
 label {
   position: absolute;
   top: 1rem;
   left: 1rem;
   font-size: 1rem;
-color: #555555;
+  color: #555555;
   pointer-events: none;
   transition: all 0.3s ease;
 }
 
+textarea:focus, input:focus {
+  outline: none;
+  border: 2px solid #ff6f61;
+}
+
+textarea:focus + label, input:focus + label {
+    color: #ff6f61;
+}
+
 textarea:focus + label, input:focus + label,
 textarea:not(:placeholder-shown) + label, input:not(:placeholder-shown) + label {
-  top: -0.5rem;
+  top: -0.6rem;
   left: 1rem;
   font-size: 0.8rem;
   background-color: #f9f9f9;
@@ -202,9 +205,8 @@ button {
   min-height: 2.5rem;
   border: none;
   border-radius: 50%;
-color: #ffffff;
   font-size: 1.2rem;
-color: #ffffff;
+  color: #ffffff;
   background: linear-gradient(135deg, #ff6f61, #ff9a9e);
   cursor: pointer;
   transition: transform 0.2s ease, background-color 0.3s ease;

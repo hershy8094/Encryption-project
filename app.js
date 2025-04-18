@@ -99,7 +99,7 @@ function decryptMessage() {
 
 function createKey() {
   const randomKey = Array.from({ length: 96 }, () => Math.floor(Math.random() * charSetArr.length));
-  key.value = randomKey.map(getChar).join("");
+  key.textContent = randomKey.map(getChar).join("");
 }
 
 function findKey(result) {
@@ -114,7 +114,7 @@ function findKey(result) {
 
 function copyResults(resultId) {
   const resultElement = document.getElementById(resultId);
-  if (resultElement.value.trim() === '') {
+  if (resultElement.textContent.trim() === '') {
     showNotification('There\'s nothing to copy!');
     return;
   }
