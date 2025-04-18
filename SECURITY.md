@@ -2,20 +2,23 @@
 
 ## Supported Versions
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
-
 | Version | Supported          |
 | ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+| 1.x     | :white_check_mark: |
+| < 1.0   | :x:                |
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
+If you discover a security vulnerability in this project, please follow these steps:
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+1. **Do not disclose it publicly.**
+2. **Contact the maintainer directly:**  
+   - Email: hersheyschwartz1gmail.com
+3. Please provide as much detail as possible, including:
+   - Steps to reproduce the vulnerability
+   - Affected version(s)
+   - Potential impact
+
+You will receive an initial response within 7 days. If the vulnerability is confirmed, a fix will be prioritized and you will be notified when it is released.
+
+Thank you for helping keep this project secure!
