@@ -13,7 +13,7 @@ If you discover a security vulnerability in this project, please follow these st
 
 1. **Do not disclose it publicly.**
 2. **Contact the maintainer directly:**  
-   - Email: hersheyschwartz1gmail.com
+   - Email: hersheyschwartz1@gmail.com
 3. Please provide as much detail as possible, including:
    - Steps to reproduce the vulnerability
    - Affected version(s)
