@@ -16,33 +16,18 @@ function getChar(num) {
   return charSetArr[num];
 }
 
-function turnInputStringToNumArr(rawTextInput, resultField) {
-  if (rawTextInput.length === 0) {
-    resultField.innerHTML = "Please enter text to encrypt.";
-    return [];
-  } else {
-    return rawTextInput.split('').map(getNumValue);
-  }
+function turnInputStringToNumArr(rawTextInput) {
+  return rawTextInput.split('').map(getNumValue);
 }
 
 function mapToRange(num) {
   return ((num % charSetArr.length) + charSetArr.length) % charSetArr.length;
 }
 
-function findKey(result) {
-  const keyCharValue = key.value;
-  if (keyCharValue.length < 96) {
-    result.textContent = "Please enter a valid encryption key.";
-    return null;
-  } else {
-    return turnInputStringToNumArr(keyCharValue, result);
-  }
-}
-
 function encryptMessage() {
-  const keyNumValue = findKey(encryptedResults);
+  if (!legitemacyCheck(encryptedResults, textInput)) return;
+  const keyNumValue = turnInputStringToNumArr(key.value);
   const encryptionArrStartingPoint = turnInputStringToNumArr(textInput.value, encryptedResults);
-  if (encryptionArrStartingPoint.length === 0 || keyNumValue === null) return;
 
   let currentEncryptionArr = encryptionArrStartingPoint;
 
@@ -53,28 +38,34 @@ function encryptMessage() {
       const key = keyNumValue[k] + 1;
       const ind = index + 1;
       const randomFactor = Math.floor((Math.sin(key + ind) * 10000) % 10);
-      return mapToRange(num + ((key ** 4) * (ind ** 4)) + randomFactor);
+      return mapToRange(num + randomFactor);
     });
 
     const encryptionArrStep2 = [];
     const key = keyNumValue[k + 1] + 1;
     let previousValue = key;
-
     for (let index = 0; index < currentEncryptionArr.length; index++) {
       const num = encryptionArrStep1[index];
       const result = num + previousValue;
       encryptionArrStep2.push(mapToRange(result));
       previousValue = result;
     }
-
-    currentEncryptionArr = encryptionArrStep2;
+    
+    const encryptionArrStep3 = encryptionArrStep2.map((num, index) => {
+      const ind = index + 1;
+      const key = keyNumValue[k] + 1;
+      return mapToRange(num + ((key ** 2) * (ind ** 2)));
+    }
+    );
+    currentEncryptionArr = encryptionArrStep3;
   }
 
   encryptedResults.textContent = currentEncryptionArr.map(getChar).join("");
 }
 
 function decryptMessage() {
-  const keyNumValue = findKey(decryptedResults);
+  if (!legitemacyCheck(decryptedResults, encryptedInput)) return;
+  const keyNumValue = turnInputStringToNumArr(key.value);
   const decryptionArrStartingPoint = turnInputStringToNumArr(encryptedInput.value, decryptedResults);
   if (decryptionArrStartingPoint.length === 0 || keyNumValue === null) return;
 
@@ -82,13 +73,18 @@ function decryptMessage() {
 
   for (let i = 11; i >= 0; i--) {
     const k = i * 8;
+    const decryptionArrStep3 = currentDecryptionArr.map((num, index) => {
+      const ind = index + 1;
+      const key = keyNumValue[k] + 1;
+      return mapToRange(num - ((key ** 2) * (ind ** 2)));
+    });
 
     const decryptionArrStep2 = [];
     const key = keyNumValue[k + 1] + 1;
     let previousValue = key;
 
     for (let index = 0; index < currentDecryptionArr.length; index++) {
-      const num = currentDecryptionArr[index];
+      const num = decryptionArrStep3[index];
       const result = mapToRange(num - previousValue);
       decryptionArrStep2.push(result);
       previousValue = mapToRange(previousValue + result);
@@ -98,7 +94,7 @@ function decryptMessage() {
       const ind = index + 1;
       const key = keyNumValue[k] + 1;
       const randomFactor = Math.floor((Math.sin(key + ind) * 10000) % 10);
-      return mapToRange(num - ((key ** 4) * (ind ** 4)) - randomFactor);
+      return mapToRange(num - randomFactor);
     });
 
     currentDecryptionArr = decryptionArrStep1;
@@ -107,6 +103,17 @@ function decryptMessage() {
   decryptedResults.textContent = currentDecryptionArr.map(getChar).join("");
 }
 
+function legitemacyCheck(resultField, input) {
+  if (key.value.length < 96) {
+    resultField.textContent = "Please enter a valid encryption key.";
+    return false;
+  }
+  else if (input.value === '') {
+    resultField.textContent = "Please enter text to process.";
+    return false;
+  }
+  return true;
+}
 function createKey() {
   const randomKey = Array.from({ length: 96 }, () => Math.floor(Math.random() * charSetArr.length));
   key.textContent = randomKey.map(getChar).join("");
