@@ -6,7 +6,7 @@ const decryptedResults = document.getElementById("decryptedResults");
 const key = document.getElementById("key");
 const charSet = "0123456789 AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz\n,;:\"'.\\/?~`!@#$%^&*()_+-=<>{}[]|";
 const charSetArr = charSet.split('');
-
+let output = false;
 //helper functions
 function getNumValue(char) {
   return charSetArr.indexOf(char);
@@ -28,11 +28,14 @@ function legitemacyCheck(resultField, input) {
   if (key.value.length < 96) {
     resultField.textContent = "Please enter a valid encryption key.";
     return false;
+    output = false;
   }
   else if (input.value === '') {
     resultField.textContent = "Please enter text to process.";
     return false;
+    output = false;
   }
+  output = true;
   return true;
 }
 
@@ -125,7 +128,7 @@ function createKey() {
 
 function copyResults(resultId) {
   const resultElement = document.getElementById(resultId);
-  if (resultElement.textContent.trim() === '') {
+  if (!output && resultId !== 'key' || resultElement.textContent.trim() === '') {
     showNotification('There\'s nothing to copy!');
     return;
   }
@@ -135,7 +138,7 @@ function copyResults(resultId) {
 
 function downloadResults(resultId) {
   const resultElement = document.getElementById(resultId);
-  if (resultElement.textContent.trim() === '') {
+  if (!output) {
     showNotification('No results to download!');
     return;
   }
