@@ -4,10 +4,10 @@ const encryptedInput = document.getElementById('encryptedInput');
 const encryptedResults = document.getElementById("encryptedResults");
 const decryptedResults = document.getElementById("decryptedResults");
 const key = document.getElementById("key");
-
 const charSet = "0123456789 AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz\n,;:\"'.\\/?~`!@#$%^&*()_+-=<>{}[]|";
 const charSetArr = charSet.split('');
 
+//helper functions
 function getNumValue(char) {
   return charSetArr.indexOf(char);
 }
@@ -24,6 +24,19 @@ function mapToRange(num) {
   return ((num % charSetArr.length) + charSetArr.length) % charSetArr.length;
 }
 
+function legitemacyCheck(resultField, input) {
+  if (key.value.length < 96) {
+    resultField.textContent = "Please enter a valid encryption key.";
+    return false;
+  }
+  else if (input.value === '') {
+    resultField.textContent = "Please enter text to process.";
+    return false;
+  }
+  return true;
+}
+
+//Main functionality
 function encryptMessage() {
   if (!legitemacyCheck(encryptedResults, textInput)) return;
   const keyNumValue = turnInputStringToNumArr(key.value);
@@ -103,17 +116,7 @@ function decryptMessage() {
   decryptedResults.textContent = currentDecryptionArr.map(getChar).join("");
 }
 
-function legitemacyCheck(resultField, input) {
-  if (key.value.length < 96) {
-    resultField.textContent = "Please enter a valid encryption key.";
-    return false;
-  }
-  else if (input.value === '') {
-    resultField.textContent = "Please enter text to process.";
-    return false;
-  }
-  return true;
-}
+//DOM Functionality
 function createKey() {
   const randomKey = Array.from({ length: 96 }, () => Math.floor(Math.random() * charSetArr.length));
   key.textContent = randomKey.map(getChar).join("");
@@ -152,17 +155,13 @@ function toggleSection(section) {
 
 
   if (section === 'encryption') {
-    decryptionSection.style.animation = 'slideOutToRight 0.3s forwards';
-    encryptionSection.style.animation = 'slideInFromLeft 0.3s forwards';
-    encryptionSection.style.display = 'block';
-    decryptionSection.style.display = 'none';
+    decryptionSection.style.animation = 'slideOutToRight 0.4s forwards';
+    encryptionSection.style.animation = 'slideInFromLeft 0.4s forwards';
     showEncryption.classList.add('active');
     showDecryption.classList.remove('active');
   } else if (section === 'decryption') {
-    encryptionSection.style.animation = 'slideOutToLeft 0.3s forwards';
-    decryptionSection.style.animation = 'slideInFromRight 0.3s forwards';
-    decryptionSection.style.display = 'block';
-    encryptionSection.style.display = 'none';
+    encryptionSection.style.animation = 'slideOutToLeft 0.4s forwards';
+    decryptionSection.style.animation = 'slideInFromRight 0.4s forwards';
     showEncryption.classList.remove('active');
     showDecryption.classList.add('active');
   }
@@ -170,12 +169,12 @@ function toggleSection(section) {
 
 function showHelp() {
   const helpModal = document.getElementById('helpModal');
-  helpModal.style.display = 'block';
+  helpModal.style.visibility = 'visible';
 }
 
 function closeHelp() {
   const helpModal = document.getElementById('helpModal');
-  helpModal.style.display = 'none';
+  helpModal.style.visibility = 'none';
 }
 
 function showNotification(message) {
