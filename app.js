@@ -172,12 +172,12 @@ function toggleSection(section) {
 
 function showHelp() {
   const helpModal = document.getElementById('helpModal');
-  helpModal.style.visibility = 'visible';
+  helpModal.style.display = 'block';
 }
 
 function closeHelp() {
   const helpModal = document.getElementById('helpModal');
-  helpModal.style.visibility = 'none';
+  helpModal.style.display = 'none';
 }
 
 function showNotification(message) {
