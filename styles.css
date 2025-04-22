@@ -56,7 +56,7 @@ section {
 }
 
 #decryptionSection {
-  transform: translateX(11vw);
+  transform: translateX(20%);
 }
 h1 {
   font-size: 2rem;
@@ -95,9 +95,7 @@ label {
   position: absolute;
   top: 0.4rem;
   left: 0.7rem;
-  font-size: 1rem;
   color: #555555;
-  pointer-events: none;
   transition: all 0.3s ease;
 }
 
@@ -107,16 +105,13 @@ input:focus {
   border: 2px solid #ff6f61;
 }
 
-textarea:focus+label,
-input:focus+label {
+textarea:focus+label {
   color: #ff6f61;
 }
 
 textarea:focus+label,
-input:focus+label,
-textarea:not(:placeholder-shown)+label,
-input:not(:placeholder-shown)+label {
-  top: -0.6rem;
+textarea:not(:placeholder-shown)+label {
+  top: -0.55rem;
   left: 1rem;
   font-size: 0.8rem;
   background-color: #f9f9f9;
@@ -158,13 +153,13 @@ fieldset {
   border: 2px solid #ff6f61;
   border-radius: 12px;
   padding: 1rem;
+  min-width: 1px;
   margin: 1.5rem 0;
   background-color: #ffffff;
 }
 
 legend {
   font-size: 1.2rem;
-  text-align: left;
   font-weight: bold;
   padding: 0 0.5rem;
 }
@@ -173,10 +168,13 @@ legend {
 #decryptedResults {
   font-family: 'Courier New', Courier, monospace;
   font-size: 1rem;
+  text-align: left;
+  overflow: auto;
   padding: 0.5rem;
   border-radius: 12px;
   white-space: pre-wrap;
   min-height: 14vh;
+  max-height: 50vh;
 }
 
 #toggleContainer {
