@@ -27,13 +27,13 @@ function mapToRange(num) {
 function legitemacyCheck(resultField, input) {
   if (key.value.length < 96) {
     resultField.textContent = "Please enter a valid encryption key.";
-    return false;
     output = false;
+    return false;
   }
   else if (input.value === '') {
     resultField.textContent = "Please enter text to process.";
-    return false;
     output = false;
+    return false;
   }
   output = true;
   return true;
@@ -66,7 +66,7 @@ function encryptMessage() {
       encryptionArrStep2.push(mapToRange(result));
       previousValue = result;
     }
-    
+
     const encryptionArrStep3 = encryptionArrStep2.map((num, index) => {
       const ind = index + 1;
       const key = keyNumValue[k] + 1;
@@ -120,29 +120,46 @@ function decryptMessage() {
 }
 
 //DOM Functionality
+document.getElementById('submitText').addEventListener('click', encryptMessage);
+document.getElementById('submitEncrypted').addEventListener('click', decryptMessage);
+document.getElementById('createKey').addEventListener('click', createKey);
+document.getElementById('copyEncryptedResults').addEventListener('click', () => copyResults('encryptedResults'));
+document.getElementById('copyDecryptedResults').addEventListener('click', () => copyResults('decryptedResults'));
+document.getElementById('copyKey').addEventListener('click', () => copyResults('key'));
+document.getElementById('downloadEncryptedResults').addEventListener('click', () => downloadResults('encryptedResults'));
+document.getElementById('downloadDecryptedResults').addEventListener('click', () => downloadResults('decryptedResults'));
+const showEncryption = document.getElementById('showEncryption');
+const showDecryption = document.getElementById('showDecryption');
+showEncryption.addEventListener('click', () => toggleSection('encryption'));
+showDecryption.addEventListener('click', () => toggleSection('decryption'));
+document.getElementById('helpButton').addEventListener('click', showHelp);
+document.getElementById('closeHelp').addEventListener('click', closeHelp);
+document.getElementById('closeHelpButton').addEventListener('click', closeHelp);
+
 function createKey() {
   const randomKey = Array.from({ length: 96 }, () => Math.floor(Math.random() * charSetArr.length));
-  key.textContent = randomKey.map(getChar).join("");
   key.value = randomKey.map(getChar).join("");
 }
 
 function copyResults(resultId) {
   const resultElement = document.getElementById(resultId);
-  if (!output && resultId !== 'key' || resultElement.textContent.trim() === '') {
+  const textToCopy = resultElement.value !== undefined ? resultElement.value : resultElement.textContent;
+  if ((!output && resultId !== 'key') || !textToCopy.trim()) {
     showNotification('There\'s nothing to copy!');
     return;
   }
-  navigator.clipboard.writeText(resultElement.textContent)
+  navigator.clipboard.writeText(textToCopy)
     .then(() => showNotification('Copied to clipboard!'))
-    .catch(() => showNotification('Failed to copy.'));}
+    .catch(() => showNotification('Failed to copy.'));
+}
 
 function downloadResults(resultId) {
   const resultElement = document.getElementById(resultId);
-  if (!output) {
+  const result = resultElement.value !== undefined ? resultElement.value : resultElement.textContent;
+  if (!output || !result.trim()) {
     showNotification('No results to download!');
     return;
   }
-  const result = document.getElementById(resultId).textContent;
   const blob = new Blob([result], { type: 'text/plain' });
   const link = document.createElement('a');
   link.href = URL.createObjectURL(blob);
@@ -153,8 +170,6 @@ function downloadResults(resultId) {
 function toggleSection(section) {
   const encryptionSection = document.getElementById('encryptionSection');
   const decryptionSection = document.getElementById('decryptionSection');
-  const showEncryption = document.getElementById('showEncryption');
-  const showDecryption = document.getElementById('showDecryption');
 
 
   if (section === 'encryption') {
@@ -181,12 +196,16 @@ function closeHelp() {
 }
 
 function showNotification(message) {
-  const notificationContainer = document.getElementById('notificationContainer');
+  const container = document.getElementById('notificationContainer');
+  container.textContent = '';
   const notification = document.createElement('div');
   notification.className = 'notification';
   notification.textContent = message;
-  notificationContainer.appendChild(notification);
+  container.appendChild(notification);
+
   setTimeout(() => {
-    notification.remove();
+    if (container.contains(notification)) {
+      container.removeChild(notification);
+    }
   }, 2000);
 }

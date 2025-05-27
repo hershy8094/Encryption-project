@@ -15,7 +15,7 @@
   <header>
     <h1>HELLO WORLD!</h1>
   </header>
-  <div id="notificationContainer"></div>
+  <div id="notificationContainer" aria-live="polite"></div>
 
   <main>
     <section>
@@ -24,18 +24,18 @@
         <label for="key">Enter key</label>
       </div>
       <div class="button-group">
-        <button id="createKey" onclick="createKey()" aria-label="Create a random encryption key">
+        <button id="createKey" aria-label="Create a random encryption key">
           <i class="fas fa-key"></i>
         </button>
-        <button id="copyKey" onclick="copyResults('key')" aria-label="Copy the encryption key">
+        <button id="copyKey" aria-label="Copy the encryption key">
           <i class="fas fa-copy"></i>
         </button>
       </div>
     </section>
 
     <div id="toggleContainer">
-      <button id="showEncryption" class="active" onclick="toggleSection('encryption')">Encryption</button>
-      <button id="showDecryption" onclick="toggleSection('decryption')">Decryption</button>
+      <button id="showEncryption" class="active">Encryption</button>
+      <button id="showDecryption">Decryption</button>
     </div>
     <div id="contentContainer">
       <section id="encryptionSection">
@@ -43,17 +43,15 @@
           <textarea id="textInput" placeholder=" "></textarea>
           <label for="textInput">Enter text to encrypt</label>
         </div>
-        <input type="submit" id="submitText" value="Submit" onclick="encryptMessage()">
+        <input type="submit" id="submitText" value="Submit">
         <fieldset>
           <legend>Encrypted Result</legend>
           <p id="encryptedResults"></p>
           <div class="button-group">
-            <button type="button" id="copyEncryptedResults" onclick="copyResults('encryptedResults')"
-              aria-label="Copy Encrypted Results">
+            <button type="button" id="copyEncryptedResults" aria-label="Copy Encrypted Results">
               <i class="fas fa-copy"></i>
             </button>
-            <button type="button" id="downloadEncryptedResults" onclick="downloadResults('encryptedResults')"
-              aria-label="Download Encrypted Results">
+            <button type="button" id="downloadEncryptedResults" aria-label="Download Encrypted Results">
               <i class="fas fa-download"></i>
             </button>
           </div>
@@ -65,29 +63,27 @@
           <textarea id="encryptedInput" placeholder=" "></textarea>
           <label for="encryptedInput">Enter text to decrypt</label>
         </div>
-        <input type="submit" id="submitEncrypted" value="Submit" onclick="decryptMessage()">
+        <input type="submit" id="submitEncrypted" value="Submit">
         <fieldset>
           <legend>Decrypted Result</legend>
           <p id="decryptedResults"></p>
           <div class="button-group">
-            <button type="button" id="copyDecryptedResults" onclick="copyResults('decryptedResults')"
-              aria-label="Copy Decrypted Results">
+            <button type="button" id="copyDecryptedResults" aria-label="Copy Decrypted Results">
               <i class="fas fa-copy"></i>
             </button>
-            <button type="button" id="downloadDecryptedResults" onclick="downloadResults('decryptedResults')"
-              aria-label="Download Decrypted Results">
+            <button type="button" id="downloadDecryptedResults" aria-label="Download Decrypted Results">
               <i class="fas fa-download"></i>
             </button>
           </div>
         </fieldset>
       </section>
     </div>
-    <button type="button" onclick="showHelp()">Help</button>
+    <button type="button" id="helpButton">Help</button>
 
   </main>
   <div id="helpModal">
     <div id="helpContent">
-      <button id="closeHelpButton" onclick="closeHelp()" aria-label="Close Help">&times;</button>
+      <button id="closeHelpButton" aria-label="Close Help">&times;</button>
       <h2>Help & Instructions</h2>
       <p>
         Welcome to the Encryption Project! This tool allows you to encrypt and decrypt text using a custom key. Follow
@@ -116,7 +112,7 @@
         cannot be decrypted. You can either enter your own key or generate a random one. The key must be exactly 96
         characters long.
       </p>
-      <button type="button" id="closeHelp" onclick="closeHelp()">Close</button>
+      <button type="button" id="closeHelp">Close</button>
     </div>
   </div>
   <script src="app.js"></script>
