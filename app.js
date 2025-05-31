@@ -8,21 +8,13 @@ const charSet = "0123456789 AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz
 const charSetArr = charSet.split('');
 let output = false;
 //helper functions
-function getNumValue(char) {
-  return charSetArr.indexOf(char);
-}
+const getNumValue = char => charSetArr.indexOf(char);
 
-function getChar(num) {
-  return charSetArr[num];
-}
+const getChar = num => charSetArr[num];
 
-function turnInputStringToNumArr(rawTextInput) {
-  return rawTextInput.split('').map(getNumValue);
-}
+const turnInputStringToNumArr = rawTextInput => rawTextInput.split('').map(getNumValue);
 
-function mapToRange(num) {
-  return ((num % charSetArr.length) + charSetArr.length) % charSetArr.length;
-}
+const mapToRange = num => ((num % charSetArr.length) + charSetArr.length) % charSetArr.length;
 
 function legitemacyCheck(resultField, input) {
   if (key.value.length < 96) {
@@ -34,10 +26,52 @@ function legitemacyCheck(resultField, input) {
     resultField.textContent = "Please enter text to process.";
     output = false;
     return false;
+  } else if (!isOnlyCharSet(input.value)) {
+    resultField.textContent = "Input contains unsupported characters!";
+    output = false;
+    return false;
   }
   output = true;
   return true;
 }
+
+function isOnlyCharSet(str) {
+  const escaped = charSet.replace(/[-[\]/{}()*+?.\\^$|]/g, '\\$&');
+  const regex = new RegExp(`^[${escaped}]*$`);
+  return regex.test(str);
+}
+
+const seededRandom = (seed) => {
+  let x = Math.sin(seed) * 10000;
+  return x - Math.floor(x);
+};
+
+const shuffleArray = (arr, keySeed) => {
+  const result = arr.slice();
+  for (let i = result.length - 1; i > 0; i--) {
+    const rand = seededRandom(keySeed + i);
+    const j = Math.floor(rand * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+};
+
+const unshuffleArray = (arr, keySeed) => {
+  const result = arr.slice();
+  // Store the swaps to reverse them
+  const swaps = [];
+  for (let i = result.length - 1; i > 0; i--) {
+    const rand = seededRandom(keySeed + i);
+    const j = Math.floor(rand * (i + 1));
+    swaps.push([i, j]);
+  }
+  // Reverse the swaps
+  for (let k = swaps.length - 1; k >= 0; k--) {
+    const [i, j] = swaps[k];
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+};
 
 //Main functionality
 function encryptMessage() {
@@ -53,7 +87,7 @@ function encryptMessage() {
     const encryptionArrStep1 = currentEncryptionArr.map((num, index) => {
       const key = keyNumValue[k] + 1;
       const ind = index + 1;
-      const randomFactor = Math.floor((Math.sin(key + ind) * 10000) % 10);
+      const randomFactor = Math.floor(seededRandom(key + ind) * 10);
       return mapToRange(num + randomFactor);
     });
 
@@ -69,11 +103,12 @@ function encryptMessage() {
 
     const encryptionArrStep3 = encryptionArrStep2.map((num, index) => {
       const ind = index + 1;
-      const key = keyNumValue[k] + 1;
+      const key = keyNumValue[k + 2] + 1;
       return mapToRange(num + ((key ** 2) * (ind ** 2)));
     }
     );
-    currentEncryptionArr = encryptionArrStep3;
+    const encryptionArrStep4 = shuffleArray(encryptionArrStep3, keyNumValue[k + 3] + 1);
+    currentEncryptionArr = encryptionArrStep4;
   }
 
   encryptedResults.textContent = currentEncryptionArr.map(getChar).join("");
@@ -89,9 +124,12 @@ function decryptMessage() {
 
   for (let i = 11; i >= 0; i--) {
     const k = i * 8;
-    const decryptionArrStep3 = currentDecryptionArr.map((num, index) => {
+
+    const decryptionArrStep4 = unshuffleArray(currentDecryptionArr, keyNumValue[k + 3] + 1);
+
+    const decryptionArrStep3 = decryptionArrStep4.map((num, index) => {
       const ind = index + 1;
-      const key = keyNumValue[k] + 1;
+      const key = keyNumValue[k + 2] + 1;
       return mapToRange(num - ((key ** 2) * (ind ** 2)));
     });
 
@@ -109,7 +147,7 @@ function decryptMessage() {
     const decryptionArrStep1 = decryptionArrStep2.map((num, index) => {
       const ind = index + 1;
       const key = keyNumValue[k] + 1;
-      const randomFactor = Math.floor((Math.sin(key + ind) * 10000) % 10);
+      const randomFactor = Math.floor(seededRandom(key + ind) * 10);
       return mapToRange(num - randomFactor);
     });
 
