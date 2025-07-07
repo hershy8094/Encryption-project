@@ -208,18 +208,15 @@ function downloadResults(resultId) {
 function toggleSection(section) {
   const encryptionSection = document.getElementById('encryptionSection');
   const decryptionSection = document.getElementById('decryptionSection');
-
+  showEncryption.classList.toggle('active');
+  showDecryption.classList.toggle('active');
 
   if (section === 'encryption') {
     decryptionSection.style.animation = 'slideOutToRight 0.4s forwards';
     encryptionSection.style.animation = 'slideInFromLeft 0.4s forwards';
-    showEncryption.classList.add('active');
-    showDecryption.classList.remove('active');
   } else if (section === 'decryption') {
     encryptionSection.style.animation = 'slideOutToLeft 0.4s forwards';
     decryptionSection.style.animation = 'slideInFromRight 0.4s forwards';
-    showEncryption.classList.remove('active');
-    showDecryption.classList.add('active');
   }
 }
 
